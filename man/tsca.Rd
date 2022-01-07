@@ -3,7 +3,7 @@
 \docType{data}
 \name{tsca}
 \alias{tsca}
-\title{The US EPA TSAC Data Set}
+\title{The US EPA TSCA Data Set}
 \format{
 A data frame with 68,191 rows and 11 variables:
 \describe{

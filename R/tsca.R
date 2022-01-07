@@ -1,4 +1,4 @@
-#' @title The US EPA TSAC Data Set
+#' @title The US EPA TSCA Data Set
 #' @description The Toxic Substances Control Act (TSCA) Chemical Substance
 #'   Inventory contains all existing chemical substances manufactured, processed,
 #'   or imported in the United States that do not qualify for an exemption or

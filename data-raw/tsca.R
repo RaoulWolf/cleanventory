@@ -64,4 +64,4 @@ tsca$last_created <- last_created
 
 # exporting data as RDA
 
-usethis::use_data(tsca, overwrite = TRUE)
+save(tsca, file = "data/tsca.rda", compress = "bzip2")
