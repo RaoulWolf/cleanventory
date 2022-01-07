@@ -1,13 +1,23 @@
 Package: cleanventory
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Title: A Package for Clean Chemical Inventories
+Version: 0.0.1
+Authors@R: 
+    c(person(given = "Raoul",
+             family = "Wolf",
+             role = c("aut", "cre"),
+             email = "raoul.wolf@ngi.no",
+             comment = c(ORCID = "0000-0001-5971-8525")))
+Description: The cleanventory package provides cleaned and partially curated
+    data sets for some of the most common chemical inventories.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/RaoulWolf/cleanventory
 BugReports: https://github.com/RaoulWolf/cleanventory/issues
+Depends: 
+    R (>= 2.10)
+RoxygenNote: 7.1.2
+Suggests: 
+    covr,
+    tinytest

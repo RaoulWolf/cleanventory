@@ -1,0 +1,56 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r}
+#| include = FALSE
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# cleanventory
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![R-CMD-check](https://github.com/RaoulWolf/cleanventory/workflows/R-CMD-check/badge.svg)](https://github.com/RaoulWolf/cleanventory/actions)
+[![Codecov test coverage](https://codecov.io/gh/RaoulWolf/cleanventory/branch/master/graph/badge.svg)](https://app.codecov.io/gh/RaoulWolf/cleanventory?branch=master)
+<!-- badges: end -->
+
+The goal of cleanventory is to provide easy access to cleaned and partially 
+curated data sets of common chemical inventories. 
+
+As of `r Sys.Date()`, the following inventories are included:
+
+
+| Chemical Inventory | Name   | Version | URL                                |
+|:------------------ |:------ |:------- |:---------------------------------- |
+| US EPA TSCA        | `tsca` | 2021-08 | https://www.epa.gov/tsca-inventory |
+
+
+## Installation
+
+You can install the development version of cleanventory from 
+[GitHub](https://github.com/) with:
+
+```{r install}
+#| eval = FALSE
+
+# install.packages("devtools")
+remotes::install_github("RaoulWolf/cleanventory")
+```
+
+## Examples
+
+This is an example which shows you how to get the data set of the US EPA TSCA:
+
+```{r example}
+library(cleanventory)
+str(tsca)
+```
