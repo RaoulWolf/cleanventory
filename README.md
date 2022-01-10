@@ -40,35 +40,6 @@ TSCA:
 
 ``` r
 library(cleanventory)
-#> Loading required package: bit64
-#> Loading required package: bit
-#> 
-#> Attaching package: 'bit'
-#> The following object is masked from 'package:base':
-#> 
-#>     xor
-#> Attaching package bit64
-#> package:bit64 (c) 2011-2017 Jens Oehlschlaegel
-#> creators: integer64 runif64 seq :
-#> coercion: as.integer64 as.vector as.logical as.integer as.double as.character as.bitstring
-#> logical operator: ! & | xor != == < <= >= >
-#> arithmetic operator: + - * / %/% %% ^
-#> math: sign abs sqrt log log2 log10
-#> math: floor ceiling trunc round
-#> querying: is.integer64 is.vector [is.atomic} [length] format print str
-#> values: is.na is.nan is.finite is.infinite
-#> aggregation: any all min max range sum prod
-#> cumulation: diff cummin cummax cumsum cumprod
-#> access: length<- [ [<- [[ [[<-
-#> combine: c rep cbind rbind as.data.frame
-#> WARNING don't use as subscripts
-#> WARNING semantics differ from integer
-#> for more help type ?bit64
-#> 
-#> Attaching package: 'bit64'
-#> The following objects are masked from 'package:base':
-#> 
-#>     %in%, :, is.double, match, order, rank
 str(tsca)
 #> 'data.frame':    68191 obs. of  11 variables:
 #>  $ id          : int  1 2 3 4 5 6 7 8 9 10 ...

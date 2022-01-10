@@ -28,4 +28,5 @@ Suggests:
     knitr,
     readxl,
     skimr,
-    tinytest
+    tinytest,
+    tools

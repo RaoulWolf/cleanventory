@@ -13,8 +13,8 @@ A data frame with 106,213 rows and 9 variables:
   \item{cas_no}{(Character) Chemical Abstract Service (CAS) registry number}
   \item{molecular_formula}{(Character) molecular formula of the substance}
   \item{description}{(Character) additional information}
-  \item{infocard url}{(Character) URL for the ECHA infocard}
-  \item{echa name}{(Character) ECHA name of the substance}
+  \item{infocard_url}{(Character) URL for the ECHA infocard}
+  \item{echa_name}{(Character) ECHA name of the substance}
   \item{version}{(Character) version and date of the file}
 }
 }

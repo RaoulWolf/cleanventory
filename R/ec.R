@@ -35,8 +35,8 @@
 #'   \item{cas_no}{(Character) Chemical Abstract Service (CAS) registry number}
 #'   \item{molecular_formula}{(Character) molecular formula of the substance}
 #'   \item{description}{(Character) additional information}
-#'   \item{infocard url}{(Character) URL for the ECHA infocard}
-#'   \item{echa name}{(Character) ECHA name of the substance}
+#'   \item{infocard_url}{(Character) URL for the ECHA infocard}
+#'   \item{echa_name}{(Character) ECHA name of the substance}
 #'   \item{version}{(Character) version and date of the file}
 #' }
 #' @source \url{https://echa.europa.eu/information-on-chemicals/ec-inventory}
