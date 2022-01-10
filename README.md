@@ -15,11 +15,13 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 The goal of cleanventory is to provide easy access to cleaned and
 partially curated data sets of common chemical inventories.
 
-As of 2022-01-07, the following inventories are included:
+As of 2022-01-10, the following inventories are included:
 
-| Chemical Inventory | Name   | Version | URL                                  |
-|:-------------------|:-------|:--------|:-------------------------------------|
-| US EPA TSCA        | `tsca` | 2021-08 | <https://www.epa.gov/tsca-inventory> |
+| Chemical Inventory | Name   | Version   | URL                                                                  |
+|:-------------------|:-------|:----------|:---------------------------------------------------------------------|
+| US EPA TSCA        | `tsca` | 2021-08   | <https://www.epa.gov/tsca-inventory>                                 |
+| ECHA CLP Annex VI  | `clp`  | 17        | <https://echa.europa.eu/en/information-on-chemicals/annex-vi-to-clp> |
+| ECHA EC            | `ec`   | *Unknown* | <https://echa.europa.eu/information-on-chemicals/ec-inventory>       |
 
 ## Installation
 
@@ -38,14 +40,43 @@ TSCA:
 
 ``` r
 library(cleanventory)
+#> Loading required package: bit64
+#> Loading required package: bit
+#> 
+#> Attaching package: 'bit'
+#> The following object is masked from 'package:base':
+#> 
+#>     xor
+#> Attaching package bit64
+#> package:bit64 (c) 2011-2017 Jens Oehlschlaegel
+#> creators: integer64 runif64 seq :
+#> coercion: as.integer64 as.vector as.logical as.integer as.double as.character as.bitstring
+#> logical operator: ! & | xor != == < <= >= >
+#> arithmetic operator: + - * / %/% %% ^
+#> math: sign abs sqrt log log2 log10
+#> math: floor ceiling trunc round
+#> querying: is.integer64 is.vector [is.atomic} [length] format print str
+#> values: is.na is.nan is.finite is.infinite
+#> aggregation: any all min max range sum prod
+#> cumulation: diff cummin cummax cumsum cumprod
+#> access: length<- [ [<- [[ [[<-
+#> combine: c rep cbind rbind as.data.frame
+#> WARNING don't use as subscripts
+#> WARNING semantics differ from integer
+#> for more help type ?bit64
+#> 
+#> Attaching package: 'bit64'
+#> The following objects are masked from 'package:base':
+#> 
+#>     %in%, :, is.double, match, order, rank
 str(tsca)
 #> 'data.frame':    68191 obs. of  11 variables:
 #>  $ id          : int  1 2 3 4 5 6 7 8 9 10 ...
-#>  $ casrn       : chr  "50-00-0" "50-01-1" "50-02-2" "50-07-7" ...
-#>  $ casregno    : num  50000 50011 50022 50077 50146 ...
+#>  $ cas_rn      : chr  "50-00-0" "50-01-1" "50-02-2" "50-07-7" ...
+#>  $ cas_reg_no  :integer64 50000 50011 50022 50077 50146 50215 50237 50248 ... 
 #>  $ uid         : chr  NA NA NA NA ...
 #>  $ exp         : int  NA NA NA NA NA NA NA NA NA NA ...
-#>  $ chemname    : chr  "Formaldehyde" "Guanidine, hydrochloride (1:1)" "Pregna-1,4-diene-3,20-dione, 9-fluoro-11,17,21-trihydroxy-16-methyl-, (11.beta.,16.alpha.)-" "Azirino[2',3':3,4]pyrrolo[1,2-a]indole-4,7-dione, 6-amino-8-[[(aminocarbonyl)oxy]methyl]-1,1a,2,8,8a,8b-hexahyd"| __truncated__ ...
+#>  $ chem_name   : chr  "Formaldehyde" "Guanidine, hydrochloride (1:1)" "Pregna-1,4-diene-3,20-dione, 9-fluoro-11,17,21-trihydroxy-16-methyl-, (11.beta.,16.alpha.)-" "Azirino[2',3':3,4]pyrrolo[1,2-a]indole-4,7-dione, 6-amino-8-[[(aminocarbonyl)oxy]methyl]-1,1a,2,8,8a,8b-hexahyd"| __truncated__ ...
 #>  $ def         : chr  NA NA NA NA ...
 #>  $ uvcb        : chr  NA NA NA NA ...
 #>  $ flag        : chr  NA NA NA "S" ...

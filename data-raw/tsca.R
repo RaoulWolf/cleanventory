@@ -44,19 +44,21 @@ tsca <- read.csv(
   colClasses = c("UID" = "character", "EXP" = "integer")
 )
 
+tsca$casregno <- bit64::as.integer64(tsca$casregno)
+
+colnames(tsca) <- c(
+  "id", "cas_rn", "cas_reg_no", "uid", "exp", "chem_name", "def", "uvcb",
+  "flag", "activity"
+)
+
 # remove temporary files
 
 file.remove(
   c(
     paste(tmp, zip_file, sep = "/"),
     paste(tmp, file_name, sep = "/")
-
   )
 )
-
-# column names to lower case
-
-colnames(tsca) <- tolower(colnames(tsca))
 
 # adding "last created" column for version control
 
@@ -64,4 +66,5 @@ tsca$last_created <- last_created
 
 # exporting data as RDA
 
-save(tsca, file = "data/tsca.rda", compress = "bzip2")
+save(tsca, file = "data/tsca.rda")
+tools::resaveRdaFiles(paths = "data/tsca.rda")

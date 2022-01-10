@@ -10,17 +10,17 @@
 #'   \url{https://www.epa.gov/tsca-inventory/how-access-tsca-inventory}.
 #' @format A data frame with 68,191 rows and 11 variables:
 #' \describe{
-#'   \item{id}{record ID number}
-#'   \item{casrn}{Chemical Abstracts Service (CAS) registry number}
-#'   \item{casregno}{CAS registry number without "-" (dashes)}
-#'   \item{uid}{unique identifier}
-#'   \item{exp}{expiration date}
-#'   \item{chemname}{preferred Chemical Abstracts (CA) index name}
-#'   \item{def}{chemical substance definition}
-#'   \item{uvcb}{UVCB flag}
-#'   \item{flag}{EPA TSCA regulatory flag}
-#'   \item{activity}{commercial activity status}
-#'   \item{last_created}{year and month (YYYY-MM) of data set publication}
+#'   \item{id}{(Integer) record ID number}
+#'   \item{cas_rn}{(Character) Chemical Abstracts Service (CAS) registry number}
+#'   \item{cas_reg_no}{(Integer64) CAS registry number without "-" (dashes)}
+#'   \item{uid}{(Character) unique identifier}
+#'   \item{exp}{(Integer) expiration date}
+#'   \item{chem_name}{(Character) preferred Chemical Abstracts (CA) index name}
+#'   \item{def}{(Character) chemical substance definition}
+#'   \item{uvcb}{(Character) UVCB flag}
+#'   \item{flag}{(Character) EPA TSCA regulatory flag}
+#'   \item{activity}{(Character) commercial activity status}
+#'   \item{last_created}{(Character) year and month (YYYY-MM) of data set publication}
 #' }
 #' @source \url{https://www.epa.gov/tsca-inventory}
 "tsca"

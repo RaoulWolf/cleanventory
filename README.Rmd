@@ -29,9 +29,11 @@ curated data sets of common chemical inventories.
 As of `r Sys.Date()`, the following inventories are included:
 
 
-| Chemical Inventory | Name   | Version | URL                                |
-|:------------------ |:------ |:------- |:---------------------------------- |
-| US EPA TSCA        | `tsca` | 2021-08 | https://www.epa.gov/tsca-inventory |
+| Chemical Inventory | Name   | Version   | URL                                                                |
+|:------------------ |:------ |:--------- |:------------------------------------------------------------------ |
+| US EPA TSCA        | `tsca` | 2021-08   | https://www.epa.gov/tsca-inventory                                 |
+| ECHA CLP Annex VI  | `clp`  | 17        | https://echa.europa.eu/en/information-on-chemicals/annex-vi-to-clp |
+| ECHA EC            | `ec`   | *Unknown* | https://echa.europa.eu/information-on-chemicals/ec-inventory       |
 
 
 ## Installation
