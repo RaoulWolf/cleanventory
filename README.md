@@ -12,6 +12,8 @@ coverage](https://codecov.io/gh/RaoulWolf/cleanventory/branch/master/graph/badge
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
+> A [ZeroPM](https://zeropm.eu/) R package
+
 The goal of cleanventory is to provide easy access to cleaned and
 partially curated data sets of common chemical inventories. In addition
 to the cleaned inventories, cleanventory also provides the functions to
@@ -59,7 +61,7 @@ str(tsca)
 
 ## Acknowledgement
 
-This R package was developed as part of the project “ZeroPM: Zero
-pollution of Persistent, Mobile substances”. This project has received
-funding from the European Union’s Horizon 2020 research and innovation
-programme under grant agreement No 101036756.
+This R package was developed as part of the project [“ZeroPM: Zero
+pollution of Persistent, Mobile substances”](https://zeropm.eu/). This
+project has received funding from the European Union’s Horizon 2020
+research and innovation programme under grant agreement No 101036756.
