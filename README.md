@@ -13,15 +13,17 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 <!-- badges: end -->
 
 The goal of cleanventory is to provide easy access to cleaned and
-partially curated data sets of common chemical inventories.
+partially curated data sets of common chemical inventories. In addition
+to the cleaned inventories, cleanventory also provides the functions to
+clean up the original files of the inventories.
 
-As of 2022-01-10, the following inventories are included:
+As of 2022-01-11, the following inventories are included:
 
-| Chemical Inventory | Name   | Version   | URL                                                                  |
-|:-------------------|:-------|:----------|:---------------------------------------------------------------------|
-| US EPA TSCA        | `tsca` | 2021-08   | <https://www.epa.gov/tsca-inventory>                                 |
-| ECHA CLP Annex VI  | `clp`  | 17        | <https://echa.europa.eu/en/information-on-chemicals/annex-vi-to-clp> |
-| ECHA EC            | `ec`   | *Unknown* | <https://echa.europa.eu/information-on-chemicals/ec-inventory>       |
+| Chemical Inventory | Name   | Function       | Version(s)            | URL                                                                  |
+|:-------------------|:-------|:---------------|:----------------------|:---------------------------------------------------------------------|
+| US EPA TSCA        | `tsca` | `clean_tsca()` | 2021-08               | <https://www.epa.gov/tsca-inventory>                                 |
+| ECHA CLP Annex VI  | `clp`  | `clean_clp()`  | 9, 10, 13, 14, 15, 17 | <https://echa.europa.eu/en/information-on-chemicals/annex-vi-to-clp> |
+| ECHA EC            | `ec`   | `clean_ec()`   | *Unknown*             | <https://echa.europa.eu/information-on-chemicals/ec-inventory>       |
 
 ## Installation
 

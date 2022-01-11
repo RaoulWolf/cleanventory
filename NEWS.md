@@ -1,3 +1,10 @@
+# cleanventory 0.0.3 (2022-01-11)
+
+* Added ECHA CLP Annex VI data sets as `clp`.
+* Added ECHA EC data set as `ec`.
+* Added functions to clean original files: `clean_tsca()`, `clean_clp()` and 
+  `clean_ec()`.
+
 # cleanventory 0.0.1 (2022-01-07)
 
 * Added US EPA TSCA data set (v. 2021-08) as `tsca`.

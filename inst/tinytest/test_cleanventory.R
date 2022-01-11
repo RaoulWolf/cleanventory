@@ -10,7 +10,7 @@ expect_equal(
 
 expect_equal(
   dim(clp),
-  c(4702L, 5L)
+  c(27857L, 5L)
 )
 
 # ec
