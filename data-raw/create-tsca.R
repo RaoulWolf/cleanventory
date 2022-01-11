@@ -1,19 +1,17 @@
-# download
+# Setting up a temporary path and defining the URL from the official website:
+# https://www.epa.gov/tsca-inventory/how-access-tsca-inventory
 
 tmp <- tempdir()
 
 url <- "https://www.epa.gov/system/files/other-files/2021-08/csv-non-cbi-tsca-inventory-202108.zip"
 
-# splitting URL to retrieve contextual information
+# Splitting the URL to retrieve the ZIP file name
 
 url_split <- unlist(strsplit(url, split = "/"))
 
 zip_file <- url_split[grepl(pattern = ".zip", url_split)]
 
-last_created <- url_split[grepl(
-  pattern = "202[[:digit:]]-",
-  url_split
-)]
+# Downloading the ZIP file to the temporary location
 
 download.file(
   url = url,
@@ -21,7 +19,7 @@ download.file(
   mode = ifelse(.Platform$OS.type == "windows", "wb", "w")
 )
 
-# unzip
+# Identify the TSCA CSV file name
 
 zip_list <- unzip(
   zipfile = paste(tmp, zip_file, sep = "/"),
@@ -30,41 +28,25 @@ zip_list <- unzip(
 
 file_name <- zip_list$Name[grepl(pattern = "TSCA", zip_list$Name)]
 
+# Unzipping the TSCA CSV from the ZIP file
+
 unzip(
   zipfile = paste(tmp, zip_file, sep = "/"),
   files = file_name,
   exdir = tempdir()
 )
 
-# read CSV
+# Read-in the TSCA CSV in "cleanventory" format
 
-tsca <- read.csv(
-  file = paste(tmp, file_name, sep = "/"),
-  na.strings = c(""),
-  colClasses = c("UID" = "character", "EXP" = "integer")
-)
+tsca <- cleanventory::read_tsca(path = paste(tmp, file_name, sep = "/"))
 
-tsca$casregno <- bit64::as.integer64(tsca$casregno)
-
-colnames(tsca) <- c(
-  "id", "cas_rn", "cas_reg_no", "uid", "exp", "chem_name", "def", "uvcb",
-  "flag", "activity"
-)
-
-# remove temporary files
+# Remove temporary files
 
 file.remove(
-  c(
-    paste(tmp, zip_file, sep = "/"),
-    paste(tmp, file_name, sep = "/")
-  )
+  c(paste(tmp, zip_file, sep = "/"), paste(tmp, file_name, sep = "/"))
 )
 
-# adding "last created" column for version control
-
-tsca$last_created <- last_created
-
-# exporting data as RDA
+# Export the data as RDA
 
 save(tsca, file = "data/tsca.rda")
 tools::resaveRdaFiles(paths = "data/tsca.rda")

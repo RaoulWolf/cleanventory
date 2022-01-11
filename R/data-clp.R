@@ -22,5 +22,4 @@
 #'   \item{atp}{(Integer) ATP version of the annex}
 #' }
 #' @source \url{https://echa.europa.eu/en/information-on-chemicals/annex-vi-to-clp}
-#' @importFrom bit64 integer64
 "clp"
