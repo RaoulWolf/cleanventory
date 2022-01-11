@@ -22,7 +22,8 @@ Imports:
     bit64,
     cellranger,
     readxl,
-    textclean
+    textclean,
+    utils
 RoxygenNote: 7.1.2
 Suggests: 
     covr,

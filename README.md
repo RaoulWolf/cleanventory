@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# cleanventory
+# cleanventory <img src="man/figures/logo.svg" align="right" height="139" />
 
 <!-- badges: start -->
 
@@ -56,3 +56,10 @@ str(tsca)
 #>  $ activity    : chr  "ACTIVE" "ACTIVE" "ACTIVE" "ACTIVE" ...
 #>  $ last_created: chr  "2021-08" "2021-08" "2021-08" "2021-08" ...
 ```
+
+## Acknowledgement
+
+This R package was developed as part of the project “ZeroPM: Zero
+pollution of Persistent, Mobile substances”. This project has received
+funding from the European Union’s Horizon 2020 research and innovation
+programme under grant agreement No 101036756.
