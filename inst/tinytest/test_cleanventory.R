@@ -16,7 +16,7 @@ expect_equal(
           ),
           destfile = paste(tmp, "annex_vi_clp_table_atp17_en.xlsx", sep = "/"),
           quiet = TRUE,
-          mode = ifelse(.Platform$OS.type == "windows", "wb", "")
+          mode = ifelse(.Platform$OS.type == "windows", "wb", "w")
         )
 
         path <- paste(tmp, "annex_vi_clp_table_atp17_en.xlsx", sep = "/")
