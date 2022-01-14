@@ -25,18 +25,28 @@ knitr::opts_chunk$set(
 
 > A [ZeroPM](https://zeropm.eu/) R package
 
-The goal of cleanventory is to provide easy access to cleaned and partially 
-curated data sets of common chemical inventories. In addition to the cleaned
-inventories, cleanventory also provides the functions to clean up the original
-files of the inventories. 
+The goal of cleanventory is to provide simple functionality to clean and 
+partially curate data sets of common chemical inventories. 
+
+The dependencies of cleanventory are kept at as minimal as possible: 
+[openxlsx](https://cran.r-project.org/web/packages/openxlsx) for handling 
+.xlsx files.
+
+We suggest the following packages/functionalities in addition: 
+[`bit64::as.integer64()`](https://cran.r-project.org/web/packages/bit64) to 
+correctly handle the `tsca$cas_reg_no` column (kept as `double` for 
+compatibility), and 
+[`textclean::replace_non_ascii()`](https://cran.r-project.org/web/packages/textclean) 
+to replace non-ASCII characters with ASCII-equivalents for the `ec$ec_name` , 
+`ec$description` and `ec$echa_name` columns (kept as is for transparency).
 
 As of `r Sys.Date()`, the following inventories are included: 
 
-| Chemical Inventory | Name   | Function       | Version(s)            | URL                                                                |
-|:------------------ |:------ |:-------------- |:--------------------- |:------------------------------------------------------------------ |
-| US EPA TSCA        | `tsca` | `clean_tsca()` | 2021-08               | https://www.epa.gov/tsca-inventory                                 |
-| ECHA CLP Annex VI  | `clp`  | `clean_clp()`  | 9, 10, 13, 14, 15, 17 | https://echa.europa.eu/en/information-on-chemicals/annex-vi-to-clp |
-| ECHA EC            | `ec`   | `clean_ec()`   | *Unknown*             | https://echa.europa.eu/information-on-chemicals/ec-inventory       |
+| Chemical Inventory | Function       | Compatible Version(s) | URL                                                                |
+|:------------------ |:-------------- |:--------------------- |:------------------------------------------------------------------ |
+| US EPA TSCA        | `clean_tsca()` | 2021-08               | https://www.epa.gov/tsca-inventory                                 |
+| ECHA CLP Annex VI  | `clean_clp()`  | 9, 10, 13, 14, 15, 17 | https://echa.europa.eu/en/information-on-chemicals/annex-vi-to-clp |
+| ECHA EC            | `clean_ec()`   | *Unknown*             | https://echa.europa.eu/information-on-chemicals/ec-inventory       |
 
 
 ## Installation
@@ -56,13 +66,45 @@ remotes::install_github("RaoulWolf/cleanventory")
 This is an example which shows you how to get the data set of the US EPA TSCA:
 
 ```{r example}
+#| message = FALSE
+
 library(cleanventory)
-str(tsca)
+
+tmp <- tempdir()
+
+url <- paste0(
+  "https://echa.europa.eu/documents/10162/17218/",
+  "annex_vi_clp_table_atp17_en.xlsx/",
+  "4dcec79c-f277-ed68-5e1b-d435900dbe34?t=1638888918944"
+)
+
+clp_file <- download.file(
+  url, 
+  destfile = paste(tmp, "annex_vi_clp_table_atp17_en.xlsx", sep = "/"),
+  quiet = TRUE,
+  mode = ifelse(.Platform$OS.type == "windows", "wb", "w")
+)
+
+path <- paste(tmp, "annex_vi_clp_table_atp17_en.xlsx", sep = "/")
+
+clp <- read_clp(path)
+
+invisible(file.remove(path))
+
+head(clp)
+
+str(clp)
 ```
 
 ## Acknowledgement
 
-This R package was developed as part of the project ["ZeroPM: Zero pollution of 
-Persistent, Mobile substances"](https://zeropm.eu/). This project has received 
-funding from the European Union's Horizon 2020 research and innovation 
-programme under grant agreement No 101036756.
+This R package was developed by the EnviData initiative at the 
+[Norwegian Geotechnical Institute (NGI)](https://www.ngi.no/eng) as part of the 
+project 
+[ZeroPM: Zero pollution of Persistent, Mobile substances](https://zeropm.eu/). 
+This project has received funding from the European Union's Horizon 2020 
+research and innovation programme under grant agreement No 101036756.
+
+If you find this package useful and can afford it, please consider making a 
+donation to a humanitarian non-profit organization, such as 
+[Sea-Watch](https://sea-watch.org/en/). Thank you. 

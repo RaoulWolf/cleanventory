@@ -10,7 +10,7 @@
 #' @author Raoul Wolf (\url{https://github.com/RaoulWolf/})
 #' @note Tested with "atp" versions 9, 10, 13, 14, 15, and 17.
 #' @examples \dontrun{
-#' zip_file <- download.file(
+#' download.file(
 #'   url = paste0(
 #'     "https://echa.europa.eu/documents/10162/17218/",
 #'     "annex_vi_clp_table_atp17_en.xlsx/",
@@ -23,22 +23,20 @@
 #'
 #' clp <- read_clp(path)
 #' }
-#' @importFrom cellranger cell_limits
-#' @importFrom readxl read_xlsx
+#' @importFrom openxlsx read.xlsx
 #' @export
 read_clp <- function(path, atp = TRUE) {
 
-  clp <- as.data.frame(
-    readxl::read_xlsx(
-      path = path,
-      range = cellranger::cell_limits(ul = c(7, 1), lr = c(NA, 4)),
-      col_names = c(
-        "index_no", "international_chemical_identification", "ec_no", "cas_no"
-      ),
-      na = "-",
-      trim_ws = FALSE
-    ),
-    stringsAsFactors = FALSE
+  clp <- openxlsx::read.xlsx(
+    xlsxFile = path,
+    startRow = 7,
+    colNames = FALSE,
+    cols = 1:4,
+    na.strings = "-"
+  )
+
+  colnames(clp) <- c(
+    "index_no", "international_chemical_identification", "ec_no", "cas_no"
   )
 
   clp_split <- split(clp, clp$index_no)
@@ -47,15 +45,15 @@ read_clp <- function(path, atp = TRUE) {
     clp_split,
     FUN = function(x) {
 
-      if (any(grepl(pattern = "\\[[[:digit:]]+\\]\r\n",
+      if (any(grepl(pattern = "\\[[[:digit:]]+\\]\n",
                     x$international_chemical_identification),
-              grepl(pattern = "\\[[[:digit:]]+\\]\r\n", x$ec_no),
-              grepl(pattern = "\\[[[:digit:]]+\\]\r\n", x$cas_no))) {
+              grepl(pattern = "\\[[[:digit:]]+\\]\n", x$ec_no),
+              grepl(pattern = "\\[[[:digit:]]+\\]\n", x$cas_no))) {
 
         international_chemical_identification_split <- unlist(
           strsplit(
             x$international_chemical_identification,
-            split = "\\[[[:digit:]]+\\]\r\n"
+            split = "\\[[[:digit:]]+\\]\n"
           )
         )
 
@@ -83,7 +81,7 @@ read_clp <- function(path, atp = TRUE) {
 
         international_chemical_identification_split <- trimws(
           gsub(
-            pattern = "\r\n",
+            pattern = "\n",
             replacement = " ",
             international_chemical_identification_split
           )
@@ -97,7 +95,7 @@ read_clp <- function(path, atp = TRUE) {
         )
 
         ec_no_split <- unlist(
-          strsplit(x$ec_no, split = "\\[[[:digit:]]+\\]\r\n")
+          strsplit(x$ec_no, split = "\\[[[:digit:]]+\\]\n")
         )
 
         ec_no_index <- unlist(
@@ -123,7 +121,7 @@ read_clp <- function(path, atp = TRUE) {
         }
 
         ec_no_split <- trimws(
-          gsub(pattern = "\r\n]", replacement = "", ec_no_split)
+          gsub(pattern = "\n]", replacement = "", ec_no_split)
         )
 
         ec_no_split <- ifelse(
@@ -137,7 +135,7 @@ read_clp <- function(path, atp = TRUE) {
         )
 
         cas_no_split <- unlist(
-          strsplit(x$cas_no, split = "\\[[[:digit:]]+\\]\r\n")
+          strsplit(x$cas_no, split = "\\[[[:digit:]]+\\]\n")
         )
 
         cas_no_index <- unlist(
@@ -163,7 +161,7 @@ read_clp <- function(path, atp = TRUE) {
         }
 
         cas_no_split <- trimws(
-          gsub(pattern = "\r\n]", replacement = "", cas_no_split)
+          gsub(pattern = "\n]", replacement = "", cas_no_split)
         )
 
         cas_no_df <- data.frame(
@@ -208,7 +206,7 @@ read_clp <- function(path, atp = TRUE) {
           index_no = x$index_no,
           international_chemical_identification = trimws(
             gsub(
-              pattern = "\r\n",
+              pattern = "\n",
               replacement = " ", x$international_chemical_identification
             )
           ),

@@ -14,18 +14,29 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 
 > A [ZeroPM](https://zeropm.eu/) R package
 
-The goal of cleanventory is to provide easy access to cleaned and
-partially curated data sets of common chemical inventories. In addition
-to the cleaned inventories, cleanventory also provides the functions to
-clean up the original files of the inventories.
+The goal of cleanventory is to provide simple functionality to clean and
+partially curate data sets of common chemical inventories.
 
-As of 2022-01-11, the following inventories are included:
+The dependencies of cleanventory are kept at as minimal as possible:
+[openxlsx](https://cran.r-project.org/web/packages/openxlsx) for
+handling .xlsx files.
 
-| Chemical Inventory | Name   | Function       | Version(s)            | URL                                                                  |
-|:-------------------|:-------|:---------------|:----------------------|:---------------------------------------------------------------------|
-| US EPA TSCA        | `tsca` | `clean_tsca()` | 2021-08               | <https://www.epa.gov/tsca-inventory>                                 |
-| ECHA CLP Annex VI  | `clp`  | `clean_clp()`  | 9, 10, 13, 14, 15, 17 | <https://echa.europa.eu/en/information-on-chemicals/annex-vi-to-clp> |
-| ECHA EC            | `ec`   | `clean_ec()`   | *Unknown*             | <https://echa.europa.eu/information-on-chemicals/ec-inventory>       |
+We suggest the following packages/functionalities in addition:
+[`bit64::as.integer64()`](https://cran.r-project.org/web/packages/bit64)
+to correctly handle the `tsca$cas_reg_no` column (kept as `double` for
+compatibility), and
+[`textclean::replace_non_ascii()`](https://cran.r-project.org/web/packages/textclean)
+to replace non-ASCII characters with ASCII-equivalents for the
+`ec$ec_name` , `ec$description` and `ec$echa_name` columns (kept as is
+for transparency).
+
+As of 2022-01-14, the following inventories are included:
+
+| Chemical Inventory | Function       | Compatible Version(s) | URL                                                                  |
+|:-------------------|:---------------|:----------------------|:---------------------------------------------------------------------|
+| US EPA TSCA        | `clean_tsca()` | 2021-08               | <https://www.epa.gov/tsca-inventory>                                 |
+| ECHA CLP Annex VI  | `clean_clp()`  | 9, 10, 13, 14, 15, 17 | <https://echa.europa.eu/en/information-on-chemicals/annex-vi-to-clp> |
+| ECHA EC            | `clean_ec()`   | *Unknown*             | <https://echa.europa.eu/information-on-chemicals/ec-inventory>       |
 
 ## Installation
 
@@ -44,24 +55,55 @@ TSCA:
 
 ``` r
 library(cleanventory)
-str(tsca)
-#> 'data.frame':    68191 obs. of  11 variables:
-#>  $ id          : int  1 2 3 4 5 6 7 8 9 10 ...
-#>  $ cas_rn      : chr  "50-00-0" "50-01-1" "50-02-2" "50-07-7" ...
-#>  $ cas_reg_no  :integer64 50000 50011 50022 50077 50146 50215 50237 50248 ... 
-#>  $ uid         : chr  NA NA NA NA ...
-#>  $ exp         : int  NA NA NA NA NA NA NA NA NA NA ...
-#>  $ chem_name   : chr  "Formaldehyde" "Guanidine, hydrochloride (1:1)" "Pregna-1,4-diene-3,20-dione, 9-fluoro-11,17,21-trihydroxy-16-methyl-, (11.beta.,16.alpha.)-" "Azirino[2',3':3,4]pyrrolo[1,2-a]indole-4,7-dione, 6-amino-8-[[(aminocarbonyl)oxy]methyl]-1,1a,2,8,8a,8b-hexahyd"| __truncated__ ...
-#>  $ def         : chr  NA NA NA NA ...
-#>  $ uvcb        : chr  NA NA NA NA ...
-#>  $ flag        : chr  NA NA NA "S" ...
-#>  $ activity    : chr  "ACTIVE" "ACTIVE" "ACTIVE" "ACTIVE" ...
-#>  $ last_created: chr  "2021-08" "2021-08" "2021-08" "2021-08" ...
+
+tmp <- tempdir()
+
+url <- paste0(
+  "https://echa.europa.eu/documents/10162/17218/",
+  "annex_vi_clp_table_atp17_en.xlsx/",
+  "4dcec79c-f277-ed68-5e1b-d435900dbe34?t=1638888918944"
+)
+
+clp_file <- download.file(
+  url, 
+  destfile = paste(tmp, "annex_vi_clp_table_atp17_en.xlsx", sep = "/"),
+  quiet = TRUE,
+  mode = ifelse(.Platform$OS.type == "windows", "wb", "w")
+)
+
+path <- paste(tmp, "annex_vi_clp_table_atp17_en.xlsx", sep = "/")
+
+clp <- read_clp(path)
+
+invisible(file.remove(path))
+
+head(clp)
+#>       index_no international_chemical_identification     ec_no     cas_no atp
+#> 1 001-001-00-9                              hydrogen 215-605-7  1333-74-0  17
+#> 2 001-002-00-4             aluminium lithium hydride 240-877-9 16853-85-3  17
+#> 3 001-003-00-X                        sodium hydride 231-587-3  7646-69-7  17
+#> 4 001-004-00-5                       calcium hydride 232-189-2  7789-78-8  17
+#> 5 003-001-00-4                               lithium 231-102-5  7439-93-2  17
+#> 6 003-002-00-X                        n-hexyllithium 404-950-0 21369-64-2  17
+
+str(clp)
+#> 'data.frame':    4702 obs. of  5 variables:
+#>  $ index_no                             : chr  "001-001-00-9" "001-002-00-4" "001-003-00-X" "001-004-00-5" ...
+#>  $ international_chemical_identification: chr  "hydrogen" "aluminium lithium hydride" "sodium hydride" "calcium hydride" ...
+#>  $ ec_no                                : chr  "215-605-7" "240-877-9" "231-587-3" "232-189-2" ...
+#>  $ cas_no                               : chr  "1333-74-0" "16853-85-3" "7646-69-7" "7789-78-8" ...
+#>  $ atp                                  : int  17 17 17 17 17 17 17 17 17 17 ...
 ```
 
 ## Acknowledgement
 
-This R package was developed as part of the project [“ZeroPM: Zero
-pollution of Persistent, Mobile substances”](https://zeropm.eu/). This
-project has received funding from the European Union’s Horizon 2020
-research and innovation programme under grant agreement No 101036756.
+This R package was developed by the EnviData initiative at the
+[Norwegian Geotechnical Institute (NGI)](https://www.ngi.no/eng) as part
+of the project [ZeroPM: Zero pollution of Persistent, Mobile
+substances](https://zeropm.eu/). This project has received funding from
+the European Union’s Horizon 2020 research and innovation programme
+under grant agreement No 101036756.
+
+If you find this package useful and can afford it, please consider
+making a donation to a humanitarian non-profit organization, such as
+[Sea-Watch](https://sea-watch.org/en/). Thank you.

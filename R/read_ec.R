@@ -10,7 +10,7 @@
 #' @author Raoul Wolf (\url{https://github.com/RaoulWolf/})
 #' @note Tested with the "version" of 2022-01-11.
 #' @examples \dontrun{
-#' zip_file <- download.file(
+#' download.file(
 #'   url = paste0(
 #'     "https://echa.europa.eu/documents/10162/17222/ec_inventory_en.csv/",
 #'     "326d9adb-27ed-5460-a2da-4f651b81e4b3"
@@ -22,7 +22,6 @@
 #'
 #' ec <- read_ec(path)
 #' }
-#' @importFrom textclean replace_non_ascii
 #' @importFrom utils read.csv
 #' @export
 read_ec <- function(path, version = FALSE) {
@@ -36,13 +35,6 @@ read_ec <- function(path, version = FALSE) {
   colnames(ec) <- c(
     "id", "ec_name", "ec_no", "cas_no", "molecular_formula", "description",
     "infocard_url", "echa_name"
-  )
-
-  ec <- transform(
-    ec,
-    ec_name = textclean::replace_non_ascii(ec$ec_name),
-    description = textclean::replace_non_ascii(ec$description),
-    echa_name = textclean::replace_non_ascii(ec$echa_name)
   )
 
   if (!is.logical(version) || is.na(version)) {

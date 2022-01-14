@@ -10,7 +10,7 @@
 #' @author Raoul Wolf (\url{https://github.com/RaoulWolf/})
 #' @note Tested with the "last created" version 2021-08.
 #' @examples \dontrun{
-#' zip_file <- download.file(
+#' download.file(
 #'   url = paste0(
 #'     "https://www.epa.gov/system/files/other-files/2021-08/",
 #'     "csv-non-cbi-tsca-inventory-202108.zip"
@@ -18,7 +18,7 @@
 #'   destfile = "csv-non-cbi-tsca-inventory-202108.zip"
 #' )
 #'
-#' unzip(zipfile = zip_file)
+#' unzip(zipfile = "csv-non-cbi-tsca-inventory-202108.zip")
 #'
 #' file_name <- list.files()
 #'
@@ -26,7 +26,6 @@
 #'
 #' tsca <- read_tsca(path)
 #' }
-#' @importFrom bit64 as.integer64
 #' @importFrom utils read.csv
 #' @export
 read_tsca <- function(path, last_created = TRUE) {
@@ -42,8 +41,6 @@ read_tsca <- function(path, last_created = TRUE) {
     "id", "cas_rn", "cas_reg_no", "uid", "exp", "chem_name", "def", "uvcb",
     "flag", "activity"
   )
-
-  tsca <- transform(tsca, cas_reg_no = bit64::as.integer64(tsca$cas_reg_no))
 
   if (!is.logical(last_created) || is.na(last_created)) {
 

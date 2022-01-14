@@ -1,3 +1,10 @@
+# cleanventory 0.0.4 (2022-01-14)
+
+* Outsourcing data sets into seperate cleanventory.data package.
+* Changing dependency from readxl to openxlsx.
+* Fixing tests to reflect the above changes. 
+* Adding new logo.
+
 # cleanventory 0.0.3 (2022-01-11)
 
 * Added ECHA CLP Annex VI data sets as `clp`.
