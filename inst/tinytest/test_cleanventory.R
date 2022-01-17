@@ -1,34 +1,34 @@
 
 # clp
 
-expect_equal(
-  dim(
-    read_clp(
-      path = {
-
-        tmp <- tempdir()
-
-        download.file(
-          url = paste0(
-            "https://echa.europa.eu/documents/10162/17218/",
-            "annex_vi_clp_table_atp17_en.xlsx/",
-            "4dcec79c-f277-ed68-5e1b-d435900dbe34?t=1638888918944"
-          ),
-          destfile = paste(tmp, "annex_vi_clp_table_atp17_en.xlsx", sep = "/"),
-          quiet = TRUE,
-          mode = ifelse(.Platform$OS.type == "windows", "wb", "w")
-        )
-
-        path <- paste(tmp, "annex_vi_clp_table_atp17_en.xlsx", sep = "/")
-
-        path
-
-      },
-      atp = FALSE
-    )
-  ),
-  c(4702L, 4L)
-)
+# expect_equal(
+#   dim(
+#     read_clp(
+#       path = {
+#
+#         tmp <- tempdir()
+#
+#         download.file(
+#           url = paste0(
+#             "https://echa.europa.eu/documents/10162/17218/",
+#             "annex_vi_clp_table_atp17_en.xlsx/",
+#             "4dcec79c-f277-ed68-5e1b-d435900dbe34?t=1638888918944"
+#           ),
+#           destfile = paste(tmp, "annex_vi_clp_table_atp17_en.xlsx", sep = "/"),
+#           quiet = TRUE,
+#           mode = ifelse(.Platform$OS.type == "windows", "wb", "w")
+#         )
+#
+#         path <- paste(tmp, "annex_vi_clp_table_atp17_en.xlsx", sep = "/")
+#
+#         path
+#
+#       },
+#       atp = FALSE
+#     )
+#   ),
+#   c(4702L, 4L)
+# )
 
 # ec
 
