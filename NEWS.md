@@ -1,3 +1,7 @@
+# cleanventory 0.1.0 (2022-01-19)
+
+* Fixed Unix issue with `read_clp()`.
+
 # cleanventory 0.0.4 (2022-01-14)
 
 * Outsourcing data sets into seperate cleanventory.data package.
