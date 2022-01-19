@@ -41,19 +41,28 @@ read_clp <- function(path, atp = TRUE) {
 
   clp_split <- split(clp, clp$index_no)
 
+
+  if (.Platform$OS.type == "windows") {
+    pattern <- "\\[[[:digit:]]+\\]\n"
+    mini_pattern <- "\n"
+  } else {
+    pattern <- "\\[[[:digit:]]+\\]\r\n"
+    mini_pattern <- "\r\n"
+  }
+
   clp_res <- lapply(
     clp_split,
     FUN = function(x) {
 
-      if (any(grepl(pattern = "\\[[[:digit:]]+\\]\n",
+      if (any(grepl(pattern = pattern,
                     x$international_chemical_identification),
-              grepl(pattern = "\\[[[:digit:]]+\\]\n", x$ec_no),
-              grepl(pattern = "\\[[[:digit:]]+\\]\n", x$cas_no))) {
+              grepl(pattern = pattern, x$ec_no),
+              grepl(pattern = pattern, x$cas_no))) {
 
         international_chemical_identification_split <- unlist(
           strsplit(
             x$international_chemical_identification,
-            split = "\\[[[:digit:]]+\\]\n"
+            split = pattern
           )
         )
 
@@ -81,7 +90,7 @@ read_clp <- function(path, atp = TRUE) {
 
         international_chemical_identification_split <- trimws(
           gsub(
-            pattern = "\n",
+            pattern = mini_pattern,
             replacement = " ",
             international_chemical_identification_split
           )
@@ -95,7 +104,7 @@ read_clp <- function(path, atp = TRUE) {
         )
 
         ec_no_split <- unlist(
-          strsplit(x$ec_no, split = "\\[[[:digit:]]+\\]\n")
+          strsplit(x$ec_no, split = pattern)
         )
 
         ec_no_index <- unlist(
@@ -121,7 +130,11 @@ read_clp <- function(path, atp = TRUE) {
         }
 
         ec_no_split <- trimws(
-          gsub(pattern = "\n]", replacement = "", ec_no_split)
+          gsub(
+            pattern = paste0(mini_pattern, "]"),
+            replacement = "",
+            ec_no_split
+          )
         )
 
         ec_no_split <- ifelse(
@@ -135,7 +148,7 @@ read_clp <- function(path, atp = TRUE) {
         )
 
         cas_no_split <- unlist(
-          strsplit(x$cas_no, split = "\\[[[:digit:]]+\\]\n")
+          strsplit(x$cas_no, split = pattern)
         )
 
         cas_no_index <- unlist(
@@ -161,7 +174,11 @@ read_clp <- function(path, atp = TRUE) {
         }
 
         cas_no_split <- trimws(
-          gsub(pattern = "\n]", replacement = "", cas_no_split)
+          gsub(
+            pattern = paste0(mini_pattern, "]"),
+            replacement = "",
+            cas_no_split
+          )
         )
 
         cas_no_df <- data.frame(
@@ -206,7 +223,7 @@ read_clp <- function(path, atp = TRUE) {
           index_no = x$index_no,
           international_chemical_identification = trimws(
             gsub(
-              pattern = "\n",
+              pattern = mini_pattern,
               replacement = " ", x$international_chemical_identification
             )
           ),
