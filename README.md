@@ -30,7 +30,7 @@ to replace non-ASCII characters with ASCII-equivalents for the
 `ec$ec_name` , `ec$description` and `ec$echa_name` columns (kept as is
 for transparency).
 
-As of 2022-01-14, the following inventories are included:
+As of 2022-01-19, the following inventories are included:
 
 | Chemical Inventory | Function       | Compatible Version(s) | URL                                                                  |
 |:-------------------|:---------------|:----------------------|:---------------------------------------------------------------------|
@@ -103,6 +103,8 @@ of the project [ZeroPM: Zero pollution of Persistent, Mobile
 substances](https://zeropm.eu/). This project has received funding from
 the European Union’s Horizon 2020 research and innovation programme
 under grant agreement No 101036756.
+
+------------------------------------------------------------------------
 
 If you find this package useful and can afford it, please consider
 making a donation to a humanitarian non-profit organization, such as
