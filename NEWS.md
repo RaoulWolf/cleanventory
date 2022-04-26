@@ -1,3 +1,9 @@
+# cleanventory 0.2.1 (2022-04-26)
+
+* Adding functionality to read and clean the Japanese NITE inventory.
+* Updated information for the US EPA TSCA inventory. 
+* Fixed rare timeout issue in testing
+
 # cleanventory 0.1.0 (2022-01-19)
 
 * Fixed Unix issue with `read_clp()`.

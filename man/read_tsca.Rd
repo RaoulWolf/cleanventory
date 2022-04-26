@@ -24,19 +24,19 @@ The function reads-in and cleans the US EPA TSCA data set into flat
   format.
 }
 \note{
-Tested with the "last created" version 2021-08.
+Tested with the "last created" version 2022-02.
 }
 \examples{
 \dontrun{
-zip_file <- download.file(
+download.file(
   url = paste0(
-    "https://www.epa.gov/system/files/other-files/2021-08/",
-    "csv-non-cbi-tsca-inventory-202108.zip"
+    "https://www.epa.gov/system/files/other-files/2022-03/",
+    "csv-non-cbi-tsca-inventory-022022.zip"
     ),
-  destfile = "csv-non-cbi-tsca-inventory-202108.zip"
+  destfile = "csv-non-cbi-tsca-inventory-022022.zip"
 )
 
-unzip(zipfile = zip_file)
+unzip(zipfile = "csv-non-cbi-tsca-inventory-022022.zip")
 
 file_name <- list.files()
 

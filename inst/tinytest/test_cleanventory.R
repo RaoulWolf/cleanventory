@@ -6,6 +6,8 @@ expect_equal(
     read_clp(
       path = {
 
+        options(timeout = max(300, getOption("timeout")))
+
         tmp <- tempdir()
 
         download.file(
@@ -56,12 +58,12 @@ expect_equal(
 
         download.file(
           url = paste0(
-            "https://www.epa.gov/system/files/other-files/2021-08/",
-            "csv-non-cbi-tsca-inventory-202108.zip"
+            "https://www.epa.gov/system/files/other-files/2022-03/",
+            "csv-non-cbi-tsca-inventory-022022.zip"
           ),
           destfile = paste(
             tmp,
-            "csv-non-cbi-tsca-inventory-202108.zip",
+            "csv-non-cbi-tsca-inventory-022022.zip",
             sep = "/"
           ),
           quiet = TRUE,
@@ -69,7 +71,7 @@ expect_equal(
         )
         unzip(zipfile = paste(
           tmp,
-          "csv-non-cbi-tsca-inventory-202108.zip",
+          "csv-non-cbi-tsca-inventory-022022.zip",
           sep = "/"
         ),
         exdir = tmp
@@ -87,5 +89,5 @@ expect_equal(
       last_created = FALSE
     )
   ),
-  c(68191L, 10L)
+  c(68576L, 10L)
 )
