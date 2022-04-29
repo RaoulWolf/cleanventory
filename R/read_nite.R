@@ -9,7 +9,7 @@
 #'   Chemical Management GHS Classification results.
 #' @return Returns a data frame.
 #' @author Raoul Wolf (\url{https://github.com/RaoulWolf/})
-#' @note Tested with the March 2022 version; GHS classifications ommitted.
+#' @note Tested with the March 2022 version; GHS classifications omitted.
 #' @examples \dontrun{
 #' download.file(
 #'   url = "https://www.nite.go.jp/chem/english/ghs/files/list_all_e.xlsx",

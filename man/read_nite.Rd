@@ -25,7 +25,7 @@ This function reads-in and automatically cleans the Japanese NITE
   Chemical Management GHS Classification results.
 }
 \note{
-Tested with the March 2022 version; GHS classifications ommitted.
+Tested with the March 2022 version; GHS classifications omitted.
 }
 \examples{
 \dontrun{

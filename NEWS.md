@@ -1,3 +1,9 @@
+# cleanventory 0.2.2 (2022-04-27)
+
+* Adding functionality to read and clean the New Zealand Inventory of 
+  Chemicals.
+* Fixed minor typos.
+
 # cleanventory 0.2.1 (2022-04-26)
 
 * Adding functionality to read and clean the Japanese NITE inventory.
