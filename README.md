@@ -24,21 +24,19 @@ handling .xlsx files.
 We suggest the following packages/functionalities in addition:
 [`bit64::as.integer64()`](https://cran.r-project.org/web/packages/bit64)
 to correctly handle the `tsca$cas_reg_no` column (kept as `double` for
-compatibility), and
-[`textclean::replace_non_ascii()`](https://cran.r-project.org/web/packages/textclean)
-to replace non-ASCII characters with ASCII-equivalents for the
-`ec$ec_name` , `ec$description` and `ec$echa_name` columns (kept as is
-for transparency).
+compatibility).
 
-As of 2022-04-29, the following inventories are included:
+As of 2022-05-04, the following inventories are included:
 
-| Chemical Inventory | Function       | Compatible Version(s) | URL                                                                                 |
-|:-------------------|:---------------|:----------------------|:------------------------------------------------------------------------------------|
-| US EPA TSCA        | `read_tsca()`  | 2021-08               | <https://www.epa.gov/tsca-inventory>                                                |
-| ECHA CLP Annex VI  | `read_clp()`   | 9, 10, 13, 14, 15, 17 | <https://echa.europa.eu/en/information-on-chemicals/annex-vi-to-clp>                |
-| ECHA EC            | `read_ec()`    | *Unknown*             | <https://echa.europa.eu/information-on-chemicals/ec-inventory>                      |
-| Japan NITE         | `read_nite()`  | March 2022            | <https://www.nite.go.jp/chem/english/ghs/ghs_download.html>                         |
-| NZ IoC             | `read_nzioc()` | December 2021         | <https://www.epa.govt.nz/database-search/new-zealand-inventory-of-chemicals-nzioc/> |
+| Chemical Inventory | Function      | Compatible Version(s) | URL                                                                                 |
+|:-------------------|:--------------|:----------------------|:------------------------------------------------------------------------------------|
+| US EPA TSCA        | `read_tsca()` | 2021-08               | <https://www.epa.gov/tsca-inventory>                                                |
+| ECHA CLP Annex VI  | `read_clp()`  | 9, 10, 13, 14, 15, 17 | <https://echa.europa.eu/en/information-on-chemicals/annex-vi-to-clp>                |
+| ECHA EC            | `read_ec()`   | *Unknown*             | <https://echa.europa.eu/information-on-chemicals/ec-inventory>                      |
+| Japan NITE         | `read_nite()` | March 2022            | <https://www.nite.go.jp/chem/english/ghs/ghs_download.html>                         |
+| New Zealand IoC    | `read_ioc()`  | December 2021         | <https://www.epa.govt.nz/database-search/new-zealand-inventory-of-chemicals-nzioc/> |
+| South Korea NCIS   | `read_ncis()` | 4 May 2022            | <https://ncis.nier.go.kr/en/mttrList.do>                                            |
+| Australia HCIS     | `read_hcis()` | *Unknown*             | <http://hcis.safeworkaustralia.gov.au/HazardousChemical>                            |
 
 ## Installation
 
@@ -47,7 +45,7 @@ You can install the development version of cleanventory from
 
 ``` r
 # install.packages("devtools")
-remotes::install_github("RaoulWolf/cleanventory")
+remotes::install_github("ZeroPM-H2020/cleanventory")
 ```
 
 ## Examples

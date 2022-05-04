@@ -1,7 +1,7 @@
 Package: cleanventory
 Type: Package
 Title: A Package to Clean Chemical Inventory Data Sets
-Version: 0.2.2
+Version: 0.2.3
 Authors@R: 
     c(person(given = "Raoul",
              family = "Wolf",
@@ -26,5 +26,4 @@ Suggests:
     janitor,
     knitr,
     skimr,
-    textclean,
     tinytest

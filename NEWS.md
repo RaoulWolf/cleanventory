@@ -1,7 +1,17 @@
+# cleanventory 0.2.3 (2022-05-04)
+
+* Added functionality to read the South Korea National Chemicals Information 
+  System (`read_ncis()`).
+* Added functionality to read the Australia Hazardous Chemical Information 
+  System (`read_hcis()`).
+* Added functionality to reasonably clean non-ASCII characters 
+  (`.clean_non_ascii()`).
+  
+
 # cleanventory 0.2.2 (2022-04-27)
 
 * Adding functionality to read and clean the New Zealand Inventory of 
-  Chemicals.
+  Chemicals (`read_ioc()`).
 * Fixed minor typos.
 
 # cleanventory 0.2.1 (2022-04-26)

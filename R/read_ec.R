@@ -2,6 +2,8 @@
 #' @description This function reads-in and automatically cleans the ECHA EC
 #'   data set.
 #' @param path (Character) The path to the CSV file.
+#' @param clean_non_ascii (Logical) Should non-ASCII characters (Greek
+#'   letters, the plus-minus sign, etc.) be cleaned? Defaults to \code{FALSE}.
 #' @param version (Logical) Should the "version" information (i.e., the date
 #'   of creation) be included? Defaults to \code{FALSE}.
 #' @details The function reads-in and cleans the ECHA EC data set into long
@@ -24,7 +26,11 @@
 #' }
 #' @importFrom utils read.csv
 #' @export
-read_ec <- function(path, version = FALSE) {
+read_ec <- function(path, clean_non_ascii = FALSE, version = FALSE) {
+
+  if (!is.logical(clean_non_ascii) || is.na(clean_non_ascii)) {
+    clean_non_ascii <- FALSE
+  }
 
   ec <- utils::read.csv(
     file = path,
@@ -37,16 +43,20 @@ read_ec <- function(path, version = FALSE) {
     "infocard_url", "echa_name"
   )
 
+  if (clean_non_ascii) {
+    ec <- transform(
+      ec,
+      ec_name = .clean_non_ascii(ec_name),
+      description = .clean_non_ascii(description),
+      echa_name = .clean_non_ascii(echa_name))
+  }
+
   if (!is.logical(version) || is.na(version)) {
-
     version <- FALSE
-
   }
 
   if (version) {
-
     ec <- transform(ec, version = paste("Unknown,", Sys.Date()))
-
   }
 
   ec

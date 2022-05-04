@@ -2,8 +2,10 @@
 
 export(read_clp)
 export(read_ec)
+export(read_hcis)
+export(read_ioc)
+export(read_ncis)
 export(read_nite)
-export(read_nzioc)
 export(read_tsca)
 importFrom(openxlsx,read.xlsx)
 importFrom(utils,read.csv)
