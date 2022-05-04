@@ -43,6 +43,24 @@ read_ec <- function(path, clean_non_ascii = FALSE, version = FALSE) {
     "infocard_url", "echa_name"
   )
 
+  ec <- transform(
+    ec,
+    cas_no = sapply(
+      cas_no,
+      FUN = function(x) {
+        if (grepl(pattern = "/", x)) {
+          cas_split <- unlist(strsplit(x, split = "/"))
+          cas_new <- paste(
+            cas_split[3], cas_split[2], as.integer(cas_split[1]), sep = "-"
+          )
+          return(cas_new)
+        } else {
+          return(cas_no)
+        }
+      }
+    )
+  )
+
   if (clean_non_ascii) {
     ec <- transform(
       ec,
