@@ -2,8 +2,8 @@
 #' @description This function reads-in and automatically cleans the ECHA EC
 #'   data set.
 #' @param path (Character) The path to the CSV file.
-#' @param clean_non_ascii (Logical) Should non-ASCII characters (Greek
-#'   letters, the plus-minus sign, etc.) be cleaned? Defaults to \code{FALSE}.
+#' @param clean_non_ascii (Logical) Should the non-ASCII characters be
+#' reasonably converted? Defaults to \code{FALSE}.
 #' @param version (Logical) Should the "version" information (i.e., the date
 #'   of creation) be included? Defaults to \code{FALSE}.
 #' @details The function reads-in and cleans the ECHA EC data set into long

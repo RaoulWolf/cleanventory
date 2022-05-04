@@ -4,10 +4,13 @@
 \alias{read_clp}
 \title{Read-In and Clean the ECHA CLP Annex VI Data Set}
 \usage{
-read_clp(path, atp = TRUE)
+read_clp(path, clean_non_ascii = FALSE, atp = TRUE)
 }
 \arguments{
 \item{path}{(Character) The path to the XLSX file.}
+
+\item{clean_non_ascii}{(Logical) Should the non-ASCII characters be
+reasonably converted? Defaults to \code{FALSE}.}
 
 \item{atp}{(Logical) Should the "atp" version information be included?
 Defaults to \code{TRUE}.}

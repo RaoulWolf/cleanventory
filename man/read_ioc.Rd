@@ -4,10 +4,13 @@
 \alias{read_ioc}
 \title{Read-In and Clean the New Zealand Inventory of Chemicals}
 \usage{
-read_ioc(path, version = TRUE)
+read_ioc(path, clean_non_ascii = FALSE, version = TRUE)
 }
 \arguments{
 \item{path}{(Character) The path to the XLSX file.}
+
+\item{clean_non_ascii}{(Logical) Should the non-ASCII characters be
+reasonably converted? Defaults to \code{FALSE}.}
 
 \item{version}{(Logical) Should the version information be included?
 Defaults to \code{TRUE}.}

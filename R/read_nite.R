@@ -3,6 +3,8 @@
 #' @description This function reads-in and automatically cleans the Japanese
 #'   NITE Chemical Management GHS Classification results.
 #' @param path (Character) The path to the XLSX file.
+#' @param clean_non_ascii (Logical) Should the non-ASCII characters be
+#'   reasonably converted? Defaults to \code{FALSE}.
 #' @param version (Character) Should the "atp" version information be included?
 #'   Defaults to \code{NULL}.
 #' @details This function reads-in and automatically cleans the Japanese NITE
@@ -22,7 +24,11 @@
 #' }
 #' @importFrom openxlsx read.xlsx
 #' @export
-read_nite <- function(path, version = NULL) {
+read_nite <- function(path, clean_non_ascii = FALSE, version = NULL) {
+
+  if (!is.logical(clean_non_ascii) || is.na(clean_non_ascii)) {
+    clean_non_ascii <- FALSE
+  }
 
   nite <- openxlsx::read.xlsx(
     xlsxFile = path,
@@ -32,6 +38,13 @@ read_nite <- function(path, version = NULL) {
 
   colnames(nite) <- c("cas", "substance_name", "id", "fy")
 
+  if (clean_non_ascii) {
+    nite <- transform(
+      nite,
+      substance_name = .clean_non_ascii(substance_name),
+      id = .clean_non_ascii(id)
+    )
+  }
   if (!is.null(version)) {
     nite <- transform(nite, version = version)
   }

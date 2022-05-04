@@ -2,6 +2,8 @@
 #' @description This function reads-in and automatically cleans the New Zealand
 #'   Inventory of Chemicals.
 #' @param path (Character) The path to the XLSX file.
+#' @param clean_non_ascii (Logical) Should the non-ASCII characters be
+#'   reasonably converted? Defaults to \code{FALSE}.
 #' @param version (Logical) Should the version information be included?
 #'   Defaults to \code{TRUE}.
 #' @details This function reads-in and automatically cleans the New Zealand
@@ -25,13 +27,25 @@
 #' }
 #' @importFrom openxlsx read.xlsx
 #' @export
-read_ioc <- function(path, version = TRUE) {
+read_ioc <- function(path, clean_non_ascii = FALSE, version = TRUE) {
+
+  if (!is.logical(clean_non_ascii) || is.na(clean_non_ascii)) {
+    clean_non_ascii <- FALSE
+  }
+
+  if (!is.logical(version) || is.na(version)) {
+    version <- TRUE
+  }
 
   ioc <- openxlsx::read.xlsx(xlsxFile = path, startRow = 2)
 
   names(ioc) <- c(
     "cas_number", "cas_name", "approval", "restrictions_exclusions"
   )
+
+  if (clean_non_ascii) {
+    ioc <- transform(ioc, cas_name = .clean_non_ascii(cas_name))
+  }
 
   if (version) {
     version <- unlist(strsplit(path, split = "/"))

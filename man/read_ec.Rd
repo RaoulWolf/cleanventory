@@ -9,8 +9,8 @@ read_ec(path, clean_non_ascii = FALSE, version = FALSE)
 \arguments{
 \item{path}{(Character) The path to the CSV file.}
 
-\item{clean_non_ascii}{(Logical) Should non-ASCII characters (Greek
-letters, the plus-minus sign, etc.) be cleaned? Defaults to \code{FALSE}.}
+\item{clean_non_ascii}{(Logical) Should the non-ASCII characters be
+reasonably converted? Defaults to \code{FALSE}.}
 
 \item{version}{(Logical) Should the "version" information (i.e., the date
 of creation) be included? Defaults to \code{FALSE}.}

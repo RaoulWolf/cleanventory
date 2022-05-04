@@ -5,10 +5,13 @@
 \title{Read-In and Clean the Japanese NITE Chemical Management GHS
   Classification Results}
 \usage{
-read_nite(path, version = NULL)
+read_nite(path, clean_non_ascii = FALSE, version = NULL)
 }
 \arguments{
 \item{path}{(Character) The path to the XLSX file.}
+
+\item{clean_non_ascii}{(Logical) Should the non-ASCII characters be
+reasonably converted? Defaults to \code{FALSE}.}
 
 \item{version}{(Character) Should the "atp" version information be included?
 Defaults to \code{NULL}.}
