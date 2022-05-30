@@ -35,7 +35,7 @@
 #' }
 #' @importFrom openxlsx read.xlsx
 #' @export
-clean_ici <- function(path, clean_non_ascii = FALSE, version = TRUE) {
+read_ici <- function(path, clean_non_ascii = FALSE, version = TRUE) {
 
   if (!is.logical(clean_non_ascii) || is.na(clean_non_ascii)) {
     clean_non_ascii <- FALSE
