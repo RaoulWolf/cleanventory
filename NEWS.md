@@ -1,3 +1,11 @@
+# cleanventory 0.2.4 (2022-05-30)
+
+* Added functionality to read the Australia Industrial Chemicals Inventory 
+  (`read_ici()`). 
+* Added function `date_to_cas()` to repair the well-known .xls(x) 
+  malformatting.
+* Updated internal function `.clean_non_ascii()` with more characters. 
+
 # cleanventory 0.2.3 (2022-05-04)
 
 * Added functionality to read the South Korea National Chemicals Information 
@@ -6,7 +14,8 @@
   System (`read_hcis()`).
 * Added functionality to reasonably clean non-ASCII characters 
   (`.clean_non_ascii()`).
-  
+* Detection of "date-ifyed" CAS Registry Numbers and automatic conversion back
+  to CAS RNs for `read_ec()`.
 
 # cleanventory 0.2.2 (2022-04-27)
 

@@ -36,7 +36,7 @@ download.file(
     "https://www.epa.govt.nz/assets/Uploads/Documents/Hazardous-Substances",
     "Guidance/NZIOC_Full_Spreadsheet_December_2021.xlsx",
     sep = "/"
-  )
+  ),
   destfile = "NZIOC_Full_Spreadsheet_December_2021.xlsx"
 )
 

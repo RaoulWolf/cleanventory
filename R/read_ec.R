@@ -55,7 +55,7 @@ read_ec <- function(path, clean_non_ascii = FALSE, version = FALSE) {
           )
           return(cas_new)
         } else {
-          return(cas_no)
+          return(x)
         }
       }
     )

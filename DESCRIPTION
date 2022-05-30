@@ -1,7 +1,7 @@
 Package: cleanventory
 Type: Package
 Title: A Package to Clean Chemical Inventory Data Sets
-Version: 0.2.3
+Version: 0.2.4
 Authors@R: 
     c(person(given = "Raoul",
              family = "Wolf",
@@ -19,11 +19,10 @@ Depends:
 Imports:
     openxlsx,
     utils
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 Suggests: 
     bit64,
     covr,
-    janitor,
     knitr,
     skimr,
     tinytest

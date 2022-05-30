@@ -26,7 +26,7 @@ We suggest the following packages/functionalities in addition:
 to correctly handle the `tsca$cas_reg_no` column (kept as `double` for
 compatibility).
 
-As of 2022-05-04, the following inventories are included:
+As of 2022-05-30, the following inventories are included:
 
 | Chemical Inventory | Function      | Compatible Version(s) | URL                                                                                 |
 |:-------------------|:--------------|:----------------------|:------------------------------------------------------------------------------------|
@@ -37,6 +37,7 @@ As of 2022-05-04, the following inventories are included:
 | New Zealand IoC    | `read_ioc()`  | December 2021         | <https://www.epa.govt.nz/database-search/new-zealand-inventory-of-chemicals-nzioc/> |
 | South Korea NCIS   | `read_ncis()` | 4 May 2022            | <https://ncis.nier.go.kr/en/mttrList.do>                                            |
 | Australia HCIS     | `read_hcis()` | *Unknown*             | <http://hcis.safeworkaustralia.gov.au/HazardousChemical>                            |
+| Australia ICI      | `read_ici()`  | 10 February 2022      | <https://www.industrialchemicals.gov.au/search-inventory>                           |
 
 ## Installation
 

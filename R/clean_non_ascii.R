@@ -18,10 +18,12 @@
       x <- gsub(pattern = "<c2><ae>", replacement = "(R)", x)
       x <- gsub(pattern = "<c2><b2>", replacement = "2", x)
       x <- gsub(pattern = "<c2><b3>", replacement = "3", x)
+      x <- gsub(pattern = "<c2><b7>", replacement = ".", x)
       x <- gsub(pattern = "<c2><b9>", replacement = "1", x)
 
       x <- gsub(pattern = "<c3><84>", replacement = "AE", x)
       x <- gsub(pattern = "<c3><96>", replacement = "OE", x)
+      x <- gsub(pattern = "<c3><97>", replacement = ".x", x) # careful
       x <- gsub(pattern = "<c3><9c>", replacement = "UE", x)
 
       x <- gsub(pattern = "<c3><a4>", replacement = "ae", x)
