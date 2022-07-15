@@ -1,7 +1,7 @@
 Package: cleanventory
 Type: Package
 Title: A Package to Clean Chemical Inventory Data Sets
-Version: 0.2.4
+Version: 0.3.0
 Authors@R: 
     c(person(given = "Raoul",
              family = "Wolf",
@@ -17,7 +17,10 @@ BugReports: https://github.com/RaoulWolf/cleanventory/issues
 Depends: 
     R (>= 3.3.0)
 Imports:
+    magick,
     openxlsx,
+    pdftools,
+    tesseract,
     utils
 RoxygenNote: 7.2.0
 Suggests: 

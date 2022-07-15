@@ -17,7 +17,7 @@
 #' }
 #' @importFrom openxlsx read.xlsx
 #' @export
-read_hcis <- function(path, clean_non_ascii = FALSE) {
+read_au_hcis <- function(path, clean_non_ascii = FALSE) {
 
   if (!is.logical(clean_non_ascii) | is.na(clean_non_ascii)) {
     clean_non_ascii <- FALSE

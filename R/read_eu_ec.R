@@ -26,7 +26,7 @@
 #' }
 #' @importFrom utils read.csv
 #' @export
-read_ec <- function(path, clean_non_ascii = FALSE, version = FALSE) {
+read_eu_ec <- function(path, clean_non_ascii = FALSE, version = FALSE) {
 
   if (!is.logical(clean_non_ascii) || is.na(clean_non_ascii)) {
     clean_non_ascii <- FALSE

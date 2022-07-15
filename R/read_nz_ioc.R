@@ -27,7 +27,7 @@
 #' }
 #' @importFrom openxlsx read.xlsx
 #' @export
-read_ioc <- function(path, clean_non_ascii = FALSE, version = TRUE) {
+read_nz_ioc <- function(path, clean_non_ascii = FALSE, version = TRUE) {
 
   if (!is.logical(clean_non_ascii) || is.na(clean_non_ascii)) {
     clean_non_ascii <- FALSE

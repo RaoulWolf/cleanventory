@@ -28,7 +28,7 @@
 #' }
 #' @importFrom utils read.csv
 #' @export
-read_tsca <- function(path, last_created = TRUE) {
+read_us_tsca <- function(path, last_created = TRUE) {
 
   if (grepl(pattern = "2022", path)) {
 

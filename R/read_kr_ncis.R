@@ -19,7 +19,7 @@
 #' }
 #' @importFrom openxlsx read.xlsx
 #' @export
-read_ncis <- function(path, clean_non_ascii = FALSE, date = TRUE) {
+read_kr_ncis <- function(path, clean_non_ascii = FALSE, date = TRUE) {
 
   if (!is.logical(clean_non_ascii) | is.na(clean_non_ascii)) {
     clean_non_ascii <- FALSE

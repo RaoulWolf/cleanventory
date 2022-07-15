@@ -24,7 +24,7 @@
 #' }
 #' @importFrom openxlsx read.xlsx
 #' @export
-read_nite <- function(path, clean_non_ascii = FALSE, version = NULL) {
+read_jp_nite <- function(path, clean_non_ascii = FALSE, version = NULL) {
 
   if (!is.logical(clean_non_ascii) || is.na(clean_non_ascii)) {
     clean_non_ascii <- FALSE

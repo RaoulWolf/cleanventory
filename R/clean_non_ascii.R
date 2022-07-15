@@ -15,6 +15,7 @@
       x <- gsub(pattern = "<c2><b5>", replacement = "micro", x)
       x <- gsub(pattern = "<c2><a0>", replacement = " ", x)
       x <- gsub(pattern = "<c2><a7>", replacement = "", x) # careful
+      x <- gsub(pattern = "<c2><ad>", replacement = "", x)
       x <- gsub(pattern = "<c2><ae>", replacement = "(R)", x)
       x <- gsub(pattern = "<c2><b2>", replacement = "2", x)
       x <- gsub(pattern = "<c2><b3>", replacement = "3", x)

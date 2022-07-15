@@ -3,7 +3,7 @@
 
 expect_equal(
   dim(
-    read_clp(
+    read_eu_clp(
       path = {
 
         options(timeout = max(300, getOption("timeout")))
@@ -36,7 +36,7 @@ expect_equal(
 
 expect_equal(
   dim(
-    read_ec(
+    read_eu_ec(
       path = paste0(
         "https://echa.europa.eu/documents/10162/17222/ec_inventory_en.csv/",
         "326d9adb-27ed-5460-a2da-4f651b81e4b3"
@@ -51,7 +51,7 @@ expect_equal(
 
 expect_equal(
   dim(
-    read_tsca(
+    read_us_tsca(
       path = {
 
         tmp <- tempdir()

@@ -27,7 +27,7 @@
 #' }
 #' @importFrom openxlsx read.xlsx
 #' @export
-read_clp <- function(path, clean_non_ascii = FALSE, atp = TRUE) {
+read_eu_clp <- function(path, clean_non_ascii = FALSE, atp = TRUE) {
 
   if (!is.logical(clean_non_ascii) || is.na(clean_non_ascii)) {
     clean_non_ascii <- FALSE

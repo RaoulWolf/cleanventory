@@ -1,3 +1,15 @@
+# cleanventory 0.3.0 (2022-07-15)
+
+* Added 2-letter country/sovereign region indication to each function to make it
+  easier to choose the right function. For example, `read_clp()` has become
+  `read_eu_clp()`.
+* Added new functions for new inventories: the Taiwan Chemical Substances 
+  Inventory (`read_tw_csi()`), the Philippine Inventory of Chemicals and 
+  Chemical Substances (`read_ph_iccs()`), the Japan Chemical Substances Control 
+  Law (`read_jp_cscl()`), the Australia Inventory of Industrial Chemicals 
+  (`read_au_iic()`), and the Canada Domestic Substances List (`read_ca_dsl()`).
+* The tests have been updated to reflect the name changes of the functions. 
+
 # cleanventory 0.2.4 (2022-05-30)
 
 * Added functionality to read the Australia Industrial Chemicals Inventory 

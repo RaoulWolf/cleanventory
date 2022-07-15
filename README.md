@@ -15,29 +15,40 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 > A [ZeroPM](https://zeropm.eu/) R package
 
 The goal of cleanventory is to provide simple functionality to clean and
-partially curate data sets of common chemical inventories.
+partially curate data sets of common chemical inventories. The aim is to
+document every step, from the raw (downloaded) files to the final
+tables.
 
 The dependencies of cleanventory are kept at as minimal as possible:
 [openxlsx](https://cran.r-project.org/web/packages/openxlsx) for
-handling .xlsx files.
+handling .xlsx files, and the trio of
+[pdftools](https://cran.r-project.org/web/packages/pdftools),
+[magick](https://cran.r-project.org/web/packages/magick) and
+[tesseract](https://cran.r-project.org/web/packages/tesseract) to
+extract data from (image) .pdf files.
 
 We suggest the following packages/functionalities in addition:
 [`bit64::as.integer64()`](https://cran.r-project.org/web/packages/bit64)
-to correctly handle the `tsca$cas_reg_no` column (kept as `double` for
-compatibility).
+to correctly handle the `us_tsca$cas_reg_no` column (kept as `double`
+for compatibility).
 
-As of 2022-05-30, the following inventories are included:
+As of 2022-07-15, the following inventories are included:
 
-| Chemical Inventory | Function      | Compatible Version(s) | URL                                                                                 |
-|:-------------------|:--------------|:----------------------|:------------------------------------------------------------------------------------|
-| US EPA TSCA        | `read_tsca()` | 2021-08               | <https://www.epa.gov/tsca-inventory>                                                |
-| ECHA CLP Annex VI  | `read_clp()`  | 9, 10, 13, 14, 15, 17 | <https://echa.europa.eu/en/information-on-chemicals/annex-vi-to-clp>                |
-| ECHA EC            | `read_ec()`   | *Unknown*             | <https://echa.europa.eu/information-on-chemicals/ec-inventory>                      |
-| Japan NITE         | `read_nite()` | March 2022            | <https://www.nite.go.jp/chem/english/ghs/ghs_download.html>                         |
-| New Zealand IoC    | `read_ioc()`  | December 2021         | <https://www.epa.govt.nz/database-search/new-zealand-inventory-of-chemicals-nzioc/> |
-| South Korea NCIS   | `read_ncis()` | 4 May 2022            | <https://ncis.nier.go.kr/en/mttrList.do>                                            |
-| Australia HCIS     | `read_hcis()` | *Unknown*             | <http://hcis.safeworkaustralia.gov.au/HazardousChemical>                            |
-| Australia ICI      | `read_ici()`  | 10 February 2022      | <https://www.industrialchemicals.gov.au/search-inventory>                           |
+| Chemical Inventory | Function         | Compatible Version(s)                        | URL                                                                                                                                                     |
+|:-------------------|:-----------------|:---------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------|
+| US EPA TSCA        | `read_us_tsca()` | 2021-08                                      | <https://www.epa.gov/tsca-inventory>                                                                                                                    |
+| EU CLP Annex VI    | `read_eu_clp()`  | 9, 10, 13, 14, 15, 17                        | <https://echa.europa.eu/en/information-on-chemicals/annex-vi-to-clp>                                                                                    |
+| EU EC              | `read_eu_ec()`   | *Unknown*                                    | <https://echa.europa.eu/information-on-chemicals/ec-inventory>                                                                                          |
+| Japan NITE         | `read_jp_nite()` | March 2022                                   | <https://www.nite.go.jp/chem/english/ghs/ghs_download.html>                                                                                             |
+| New Zealand IoC    | `read_nz_ioc()`  | December 2021                                | <https://www.epa.govt.nz/database-search/new-zealand-inventory-of-chemicals-nzioc/>                                                                     |
+| South Korea NCIS   | `read_kr_ncis()` | 4 May 2022                                   | <https://ncis.nier.go.kr/en/mttrList.do>                                                                                                                |
+| Australia HCIS     | `read_au_hcis()` | *Unknown*                                    | <http://hcis.safeworkaustralia.gov.au/HazardousChemical>                                                                                                |
+| Australia ICI      | `read_au_ici()`  | 10 February 2022                             | <https://www.industrialchemicals.gov.au/search-inventory>                                                                                               |
+| Taiwan CSI         | `read_tw_csi()`  | *Unknown*                                    | <https://gazette.nat.gov.tw/egFront/detail.do?metaid=73440&log=detailLog></br><https://gazette.nat.gov.tw/egFront/detail.do?metaid=78617&log=detailLog> |
+| Philippine ICCS    | `read_ph_iccs()` | 2017, 2020, 2021                             | <https://chemical.emb.gov.ph/?page_id=138>                                                                                                              |
+| Japan CSCL         | `read_jp_cscl()` | 31 May 2022</br>31 May 2022</br>1 April 2022 | <https://www.nite.go.jp/en/chem/chrip/chrip_search/sltLst>                                                                                              |
+| Australia IIC      | `read_au_iic()`  | *Unknown*                                    | <https://services.industrialchemicals.gov.au/public-chemical-page/>                                                                                     |
+| Canada DSL         | `read_ca_dsl()`  | 14 June 2022                                 | <https://pollution-waste.canada.ca/substances-search/Substance?lang=en>                                                                                 |
 
 ## Installation
 
@@ -65,7 +76,7 @@ url <- paste0(
   "4dcec79c-f277-ed68-5e1b-d435900dbe34?t=1638888918944"
 )
 
-clp_file <- download.file(
+eu_clp_file <- download.file(
   url, 
   destfile = paste(tmp, "annex_vi_clp_table_atp17_en.xlsx", sep = "/"),
   quiet = TRUE,
@@ -74,11 +85,11 @@ clp_file <- download.file(
 
 path <- paste(tmp, "annex_vi_clp_table_atp17_en.xlsx", sep = "/")
 
-clp <- read_clp(path)
+eu_clp <- read_clp(path)
 
 invisible(file.remove(path))
 
-head(clp)
+head(eu_clp)
 #>       index_no international_chemical_identification     ec_no     cas_no atp
 #> 1 001-001-00-9                              hydrogen 215-605-7  1333-74-0  17
 #> 2 001-002-00-4             aluminium lithium hydride 240-877-9 16853-85-3  17
@@ -87,7 +98,7 @@ head(clp)
 #> 5 003-001-00-4                               lithium 231-102-5  7439-93-2  17
 #> 6 003-002-00-X                        n-hexyllithium 404-950-0 21369-64-2  17
 
-str(clp)
+str(eu_clp)
 #> 'data.frame':    4702 obs. of  5 variables:
 #>  $ index_no                             : chr  "001-001-00-9" "001-002-00-4" "001-003-00-X" "001-004-00-5" ...
 #>  $ international_chemical_identification: chr  "hydrogen" "aluminium lithium hydride" "sodium hydride" "calcium hydride" ...
@@ -98,12 +109,11 @@ str(clp)
 
 ## Acknowledgement
 
-This R package was developed by the EnviData initiative at the
-[Norwegian Geotechnical Institute (NGI)](https://www.ngi.no/eng) as part
-of the project [ZeroPM: Zero pollution of Persistent, Mobile
-substances](https://zeropm.eu/). This project has received funding from
-the European Union’s Horizon 2020 research and innovation programme
-under grant agreement No 101036756.
+This R package was developed at the [Norwegian Geotechnical Institute
+(NGI)](https://www.ngi.no/eng) as part of the project [ZeroPM: Zero
+pollution of Persistent, Mobile substances](https://zeropm.eu/). This
+project has received funding from the European Union’s Horizon 2020
+research and innovation programme under grant agreement No 101036756.
 
 ------------------------------------------------------------------------
 
