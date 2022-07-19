@@ -62,9 +62,10 @@ read_eu_eci <- function(path, clean_non_ascii = FALSE) {
   if (clean_non_ascii) {
     eci <- transform(
       eci,
-      eci_name = .clean_non_ascii(ec_name),
+      ec_name = .clean_non_ascii(ec_name),
       description = .clean_non_ascii(description),
-      echa_name = .clean_non_ascii(echa_name))
+      echa_name = .clean_non_ascii(echa_name)
+    )
   }
 
   eci
