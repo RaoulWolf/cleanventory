@@ -5,16 +5,13 @@
 \title{Read-In and Clean the South Korean National Chemical Information
   System Data Set}
 \usage{
-read_kr_ncis(path, clean_non_ascii = FALSE, date = TRUE)
+read_kr_ncis(path, clean_non_ascii = FALSE)
 }
 \arguments{
 \item{path}{(Character) The path to the XLSX file.}
 
 \item{clean_non_ascii}{(Logical) Should the non-ASCII characters be
 reasonably converted? Defaults to \code{FALSE}.}
-
-\item{date}{(Logical) Should the date of the XLSX file be included?
-Defaults to \code{TRUE}.}
 }
 \value{
 Returns a data frame.
@@ -34,7 +31,7 @@ Tested with an XLSX retrieved on 3 May 2022.
 \dontrun{
 path <- "Chemical+Search_20220503055738.xlsx"
 
-ncis <- read_ncis(path)
+ncis <- read_kr_ncis(path)
 }
 }
 \author{

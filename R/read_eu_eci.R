@@ -1,11 +1,9 @@
-#' @title Read-In and Clean the ECHA EC Data Set
+#' @title Read-In and Clean the ECHA EC Inventory Data Set
 #' @description This function reads-in and automatically cleans the ECHA EC
 #'   data set.
 #' @param path (Character) The path to the CSV file.
 #' @param clean_non_ascii (Logical) Should the non-ASCII characters be
 #' reasonably converted? Defaults to \code{FALSE}.
-#' @param version (Logical) Should the "version" information (i.e., the date
-#'   of creation) be included? Defaults to \code{FALSE}.
 #' @details The function reads-in and cleans the ECHA EC data set into long
 #'   flat format.
 #' @return Returns a data frame.
@@ -22,29 +20,29 @@
 #'
 #' path <- "ec_inventory_en.csv"
 #'
-#' ec <- read_ec(path)
+#' eci <- read_eu_eci(path)
 #' }
 #' @importFrom utils read.csv
 #' @export
-read_eu_ec <- function(path, clean_non_ascii = FALSE, version = FALSE) {
+read_eu_eci <- function(path, clean_non_ascii = FALSE) {
 
   if (!is.logical(clean_non_ascii) || is.na(clean_non_ascii)) {
     clean_non_ascii <- FALSE
   }
 
-  ec <- utils::read.csv(
+  eci <- utils::read.csv(
     file = path,
     na.strings = c("", "-"),
     stringsAsFactors = FALSE
   )
 
-  colnames(ec) <- c(
+  colnames(eci) <- c(
     "id", "ec_name", "ec_no", "cas_no", "molecular_formula", "description",
     "infocard_url", "echa_name"
   )
 
-  ec <- transform(
-    ec,
+  eci <- transform(
+    eci,
     cas_no = sapply(
       cas_no,
       FUN = function(x) {
@@ -62,21 +60,13 @@ read_eu_ec <- function(path, clean_non_ascii = FALSE, version = FALSE) {
   )
 
   if (clean_non_ascii) {
-    ec <- transform(
-      ec,
-      ec_name = .clean_non_ascii(ec_name),
+    eci <- transform(
+      eci,
+      eci_name = .clean_non_ascii(ec_name),
       description = .clean_non_ascii(description),
       echa_name = .clean_non_ascii(echa_name))
   }
 
-  if (!is.logical(version) || is.na(version)) {
-    version <- FALSE
-  }
-
-  if (version) {
-    ec <- transform(ec, version = paste("Unknown,", Sys.Date()))
-  }
-
-  ec
+  eci
 
 }

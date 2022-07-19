@@ -31,7 +31,7 @@
 #'
 #' path <- "Eg01.pdf"
 #'
-#' tcsi <- read_tcsi(path)
+#' tcsi <- read_tw_csi(path)
 #' }
 #' @importFrom magick image_read image_reducenoise
 #' @importFrom pdftools pdf_convert

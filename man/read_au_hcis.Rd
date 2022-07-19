@@ -31,7 +31,7 @@ Tested with an XLSX retrieved on 4 May 2022.
 \dontrun{
 path <- "HCResults.xlsx"
 
-hcis <- read_hcis(path)
+hcis <- read_au_hcis(path)
 }
 }
 \author{

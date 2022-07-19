@@ -13,13 +13,13 @@
 #' @examples \dontrun{
 #' path <- "HCResults.xlsx"
 #'
-#' hcis <- read_hcis(path)
+#' hcis <- read_au_hcis(path)
 #' }
 #' @importFrom openxlsx read.xlsx
 #' @export
 read_au_hcis <- function(path, clean_non_ascii = FALSE) {
 
-  if (!is.logical(clean_non_ascii) | is.na(clean_non_ascii)) {
+  if (!is.logical(clean_non_ascii) || is.na(clean_non_ascii)) {
     clean_non_ascii <- FALSE
   }
 

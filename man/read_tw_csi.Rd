@@ -60,7 +60,7 @@ download.file(
 
 path <- "Eg01.pdf"
 
-tcsi <- read_tcsi(path)
+tcsi <- read_tw_csi(path)
 }
 }
 \author{

@@ -4,13 +4,10 @@
 \alias{read_us_tsca}
 \title{Read-In and Clean the US EPA TSCA Data Set}
 \usage{
-read_us_tsca(path, last_created = TRUE)
+read_us_tsca(path)
 }
 \arguments{
 \item{path}{(Character) The path to the extracted CSV file.}
-
-\item{last_created}{(Logical) Should the "last created" information be
-extracted from the file name? Defaults to \code{TRUE}.}
 }
 \value{
 Returns a data frame.
@@ -24,7 +21,7 @@ The function reads-in and cleans the US EPA TSCA data set into flat
   format.
 }
 \note{
-Tested with the "last created" version 2022-02.
+Tested with version 2022-02.
 }
 \examples{
 \dontrun{
@@ -42,7 +39,7 @@ file_name <- list.files()
 
 path <- file_name[grepl(pattern = "TSCA", file_name)]
 
-tsca <- read_tsca(path)
+tsca <- read_us_tsca(path)
 }
 }
 \author{

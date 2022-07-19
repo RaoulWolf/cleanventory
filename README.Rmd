@@ -41,22 +41,21 @@ compatibility).
 
 As of `r Sys.Date()`, the following inventories are included: 
 
-| Chemical Inventory | Function         | Compatible Version(s) | URL                                                                               |
-|:------------------ |:---------------- |:--------------------- |:--------------------------------------------------------------------------------- |
-| US EPA TSCA        | `read_us_tsca()` | 2021-08               | https://www.epa.gov/tsca-inventory                                                |
-| EU CLP Annex VI    | `read_eu_clp()`  | 9, 10, 13, 14, 15, 17 | https://echa.europa.eu/en/information-on-chemicals/annex-vi-to-clp                |
-| EU EC              | `read_eu_ec()`   | *Unknown*             | https://echa.europa.eu/information-on-chemicals/ec-inventory                      |
-| Japan NITE         | `read_jp_nite()` | March 2022            | https://www.nite.go.jp/chem/english/ghs/ghs_download.html                         |
-| New Zealand IoC    | `read_nz_ioc()`  | December 2021         | https://www.epa.govt.nz/database-search/new-zealand-inventory-of-chemicals-nzioc/ |
-| South Korea NCIS   | `read_kr_ncis()` | 4 May 2022            | https://ncis.nier.go.kr/en/mttrList.do                                            |
-| Australia HCIS     | `read_au_hcis()` | *Unknown*             | http://hcis.safeworkaustralia.gov.au/HazardousChemical                            |
-| Australia ICI      | `read_au_ici()`  | 10 February 2022      | https://www.industrialchemicals.gov.au/search-inventory                           |
-| Taiwan CSI         | `read_tw_csi()`  | *Unknown*             |  https://gazette.nat.gov.tw/egFront/detail.do?metaid=73440&log=detailLog</br>https://gazette.nat.gov.tw/egFront/detail.do?metaid=78617&log=detailLog |
-| Philippine ICCS    | `read_ph_iccs()` | 2017, 2020, 2021      | https://chemical.emb.gov.ph/?page_id=138 |
-| Japan CSCL         | `read_jp_cscl()` | 31 May 2022</br>31 May 2022</br>1 April 2022 | https://www.nite.go.jp/en/chem/chrip/chrip_search/sltLst|
-| Australia IIC      | `read_au_iic()`  | *Unknown*             | https://services.industrialchemicals.gov.au/public-chemical-page/ |
-| Canada DSL         | `read_ca_dsl()`  | 14 June 2022          | https://pollution-waste.canada.ca/substances-search/Substance?lang=en |
-
+| Chemical Inventory | Function          | Compatible Version(s) | URL                                                                               |
+|:------------------ |:----------------- |:--------------------- |:--------------------------------------------------------------------------------- |
+| US TSCA            | `read_us_tsca()`  | 2021-08               | https://www.epa.gov/tsca-inventory                                                |
+| EU CLP Annex VI    | `read_eu_clp()`   | 9, 10, 13, 14, 15, 17 | https://echa.europa.eu/en/information-on-chemicals/annex-vi-to-clp                |
+| EU ECI             | `read_eu_eci()`   | *Unknown*             | https://echa.europa.eu/information-on-chemicals/ec-inventory                      |
+| Japan NITE         | `read_jp_nite()`  | March 2022            | https://www.nite.go.jp/chem/english/ghs/ghs_download.html                         |
+| New Zealand IoC    | `read_nz_ioc()`   | December 2021         | https://www.epa.govt.nz/database-search/new-zealand-inventory-of-chemicals-nzioc/ |
+| South Korea NCIS   | `read_kr_ncis()`  | 4 May 2022            | https://ncis.nier.go.kr/en/mttrList.do                                            |
+| Australia HCIS     | `read_au_hcis()`  | *Unknown*             | http://hcis.safeworkaustralia.gov.au/HazardousChemical                            |
+| Australia ICI      | `read_au_ici()`   | 10 February 2022      | https://www.industrialchemicals.gov.au/search-inventory                           |
+| Taiwan CSI         | `read_tw_csi()`   | *Unknown*             |  https://gazette.nat.gov.tw/egFront/detail.do?metaid=73440&log=detailLog</br>https://gazette.nat.gov.tw/egFront/detail.do?metaid=78617&log=detailLog |
+| Philippine ICCS    | `read_ph_iccs()`  | 2017, 2020, 2021      | https://chemical.emb.gov.ph/?page_id=138 |
+| Japan CSCL         | `read_jp_cscl()`  | 31 May 2022</br>31 May 2022</br>1 April 2022 | https://www.nite.go.jp/en/chem/chrip/chrip_search/sltLst|
+| Canada DSL         | `read_ca_dsl()`   | 14 June 2022          | https://pollution-waste.canada.ca/substances-search/Substance?lang=en |
+| China IECSC        | `read_cn_iecsc()` | 2013                  | https://www.mee.gov.cn/gkml/hbb/bgg/201301/t20130131_245810.htm
 
 ## Installation
 
@@ -72,7 +71,8 @@ remotes::install_github("ZeroPM-H2020/cleanventory")
 
 ## Examples
 
-This is an example which shows you how to get the data set of the US EPA TSCA:
+This is an example which shows you how to get the data set of the (current) EU 
+CLP Annex VI:
 
 ```{r, echo=FALSE}
 options(timeout = max(300, getOption("timeout")))
@@ -101,7 +101,7 @@ eu_clp_file <- download.file(
 
 path <- paste(tmp, "annex_vi_clp_table_atp17_en.xlsx", sep = "/")
 
-eu_clp <- read_clp(path)
+eu_clp <- read_eu_clp(path)
 
 invisible(file.remove(path))
 

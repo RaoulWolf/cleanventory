@@ -5,8 +5,6 @@
 #' @param path (Character) The path to the XLSX file.
 #' @param clean_non_ascii (Logical) Should the non-ASCII characters be
 #'   reasonably converted? Defaults to \code{FALSE}.
-#' @param version (Character) Should the "atp" version information be included?
-#'   Defaults to \code{NULL}.
 #' @details This function reads-in and automatically cleans the Japanese NITE
 #'   Chemical Management GHS Classification results.
 #' @return Returns a data frame.
@@ -20,11 +18,11 @@
 #'
 #' path <- "list_all_e"
 #'
-#' nite <- read_nite(path)
+#' nite <- read_jp_nite(path)
 #' }
 #' @importFrom openxlsx read.xlsx
 #' @export
-read_jp_nite <- function(path, clean_non_ascii = FALSE, version = NULL) {
+read_jp_nite <- function(path, clean_non_ascii = FALSE) {
 
   if (!is.logical(clean_non_ascii) || is.na(clean_non_ascii)) {
     clean_non_ascii <- FALSE
@@ -32,11 +30,15 @@ read_jp_nite <- function(path, clean_non_ascii = FALSE, version = NULL) {
 
   nite <- openxlsx::read.xlsx(
     xlsxFile = path,
-    cols = 1:4,
+    cols = 1:6,
     na.strings = c("-", "", " ", " -")
   )
 
-  colnames(nite) <- c("cas", "substance_name", "id", "fy")
+  colnames(nite) <- c(
+    "cas", "cas_without_hyphen", "substance_name", "id", "fy", "new_revise"
+  )
+
+  nite <- transform(nite, cas_without_hyphen = as.integer(cas_without_hyphen))
 
   if (clean_non_ascii) {
     nite <- transform(
@@ -44,9 +46,6 @@ read_jp_nite <- function(path, clean_non_ascii = FALSE, version = NULL) {
       substance_name = .clean_non_ascii(substance_name),
       id = .clean_non_ascii(id)
     )
-  }
-  if (!is.null(version)) {
-    nite <- transform(nite, version = version)
   }
 
   nite

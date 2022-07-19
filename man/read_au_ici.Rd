@@ -4,16 +4,13 @@
 \alias{read_au_ici}
 \title{Read-In and Clean the Australia Industrial Chemicals Inventory}
 \usage{
-read_au_ici(path, clean_non_ascii = FALSE, version = TRUE)
+read_au_ici(path, clean_non_ascii = FALSE)
 }
 \arguments{
 \item{path}{(Character) The path to the XLSX file.}
 
 \item{clean_non_ascii}{(Logical) Should the non-ASCII characters be
 reasonably converted? Defaults to \code{FALSE}.}
-
-\item{version}{(Logical) Should the version information be included?
-Defaults to \code{TRUE}.}
 }
 \value{
 Returns a data frame.
@@ -50,7 +47,7 @@ download.file(
 
 path <- "Full list of chemicals on the Inventory - 10 February 2022.xlsx"
 
-ici <- read_ici(path)
+ici <- read_au_ici(path)
 }
 }
 \author{

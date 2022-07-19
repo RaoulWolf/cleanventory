@@ -5,19 +5,14 @@
 \title{Read-In and Clean the Philippines Inventory of Chemicals and Chemical
   Substances}
 \usage{
-read_ph_iccs(path, file = "iccs", clean_non_ascii = FALSE, year = FALSE)
+read_ph_iccs(path, clean_non_ascii = FALSE)
 }
 \arguments{
 \item{path}{(Character) The path to the \code{iccs} PDF file. Not used
 for \code{emb20} or \code{emb21}.}
 
-\item{file}{(Character) Which type of file? Must be one of \code{piccs},
-\code{emb20} or \code{emb21}.}
-
 \item{clean_non_ascii}{(Logical) Should the non-ASCII characters be
 reasonably converted? Defaults to \code{FALSE}.}
-
-\item{year}{(Logical) Adds the year as extra column. Defaults to \code{FALSE}.}
 }
 \value{
 Returns a data frame.
@@ -43,7 +38,7 @@ download.file(
 
 path <- "PICCS.2017.pdf"
 
-piccs <- read_piccs(path)
+piccs <- read_ph_iccs(path)
 }
 }
 \author{

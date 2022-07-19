@@ -5,8 +5,6 @@
 #' @param path (Character) The path to the XLSX file.
 #' @param clean_non_ascii (Logical) Should the non-ASCII characters be
 #' reasonably converted? Defaults to \code{FALSE}.
-#' @param date (Logical) Should the date of the XLSX file be included?
-#'   Defaults to \code{TRUE}.
 #' @details The function reads-in and cleans the South Korean National Chemical
 #'   Information System (NCIS) data set into long flat format.
 #' @return Returns a data frame.
@@ -15,18 +13,14 @@
 #' @examples \dontrun{
 #' path <- "Chemical+Search_20220503055738.xlsx"
 #'
-#' ncis <- read_ncis(path)
+#' ncis <- read_kr_ncis(path)
 #' }
 #' @importFrom openxlsx read.xlsx
 #' @export
-read_kr_ncis <- function(path, clean_non_ascii = FALSE, date = TRUE) {
+read_kr_ncis <- function(path, clean_non_ascii = FALSE) {
 
   if (!is.logical(clean_non_ascii) | is.na(clean_non_ascii)) {
     clean_non_ascii <- FALSE
-  }
-
-  if (!is.logical(date) | is.na(date)) {
-    date <- TRUE
   }
 
   ncis_1 <- openxlsx::read.xlsx(
@@ -55,7 +49,7 @@ read_kr_ncis <- function(path, clean_non_ascii = FALSE, date = TRUE) {
     ncis <- transform(
       ncis,
       cas_no = .clean_non_ascii(cas_no),
-      chemical_name = .clean_non_ascii(chemical_name)
+      chemical_name = trimws(.clean_non_ascii(chemical_name))
     )
   }
 
@@ -111,20 +105,6 @@ read_kr_ncis <- function(path, clean_non_ascii = FALSE, date = TRUE) {
       )
     )
   )
-
-  if (date) {
-
-    path_split <- unlist(strsplit(path, split = "/"))
-
-    file_name <- path_split[grepl(pattern = ".xlsx", path_split)]
-
-    file_date <- gsub(pattern = "[^[:digit:]]", replacement = "", file_name)
-    file_date <- substr(file_date, start = 1, stop = 8)
-    file_date <- as.POSIXct(file_date, tz = "Asia/Seoul", format = "%Y%m%d")
-
-    ncis_agg <- transform(ncis_agg, date = file_date)
-
-  }
 
   ncis_agg
 

@@ -4,8 +4,6 @@
 #' @param path (Character) The path to the XLSX file.
 #' @param clean_non_ascii (Logical) Should the non-ASCII characters be
 #'   reasonably converted? Defaults to \code{FALSE}.
-#' @param version (Logical) Should the version information be included?
-#'   Defaults to \code{TRUE}.
 #' @details This function reads-in and automatically cleans the New Zealand
 #'   Inventory of Chemicals.
 #' @return Returns a data frame.
@@ -27,14 +25,10 @@
 #' }
 #' @importFrom openxlsx read.xlsx
 #' @export
-read_nz_ioc <- function(path, clean_non_ascii = FALSE, version = TRUE) {
+read_nz_ioc <- function(path, clean_non_ascii = FALSE) {
 
   if (!is.logical(clean_non_ascii) || is.na(clean_non_ascii)) {
     clean_non_ascii <- FALSE
-  }
-
-  if (!is.logical(version) || is.na(version)) {
-    version <- TRUE
   }
 
   ioc <- openxlsx::read.xlsx(xlsxFile = path, startRow = 2)
@@ -43,23 +37,17 @@ read_nz_ioc <- function(path, clean_non_ascii = FALSE, version = TRUE) {
     "cas_number", "cas_name", "approval", "restrictions_exclusions"
   )
 
+  ioc <- transform(
+    ioc,
+    cas_number = ifelse(
+      test = .check_cas(cas_number),
+      yes = cas_number,
+      no = NA_character_
+    )
+  )
+
   if (clean_non_ascii) {
     ioc <- transform(ioc, cas_name = .clean_non_ascii(cas_name))
-  }
-
-  if (version) {
-    version <- unlist(strsplit(path, split = "/"))
-    version <- version[
-      sapply(
-        version,
-        FUN = function(x) { grepl(pattern = ".xlsx", x) },
-        USE.NAMES = FALSE
-      )
-    ]
-    version <- unlist(strsplit(version, split = "\\."))[1]
-    version <- rev(unlist(strsplit(version, split = "_")))
-    version <- paste(version[2], version[1])
-    ioc <- transform(ioc, version = version)
   }
 
   ioc

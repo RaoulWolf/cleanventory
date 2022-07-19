@@ -4,8 +4,6 @@
 #' @param path (Character) The path to the XLSX file.
 #' @param clean_non_ascii (Logical) Should the non-ASCII characters be
 #'   reasonably converted? Defaults to \code{FALSE}.
-#' @param atp (Logical) Should the "atp" version information be included?
-#'   Defaults to \code{TRUE}.
 #' @details The function reads-in and cleans the ECHA CLP Annex VI data set
 #'   into long flat format.
 #' @return Returns a data frame.
@@ -23,18 +21,14 @@
 #'
 #' path <- "annex_vi_clp_table_atp17_en.xlsx"
 #'
-#' clp <- read_clp(path)
+#' clp <- read_eu_clp(path)
 #' }
 #' @importFrom openxlsx read.xlsx
 #' @export
-read_eu_clp <- function(path, clean_non_ascii = FALSE, atp = TRUE) {
+read_eu_clp <- function(path, clean_non_ascii = FALSE) {
 
   if (!is.logical(clean_non_ascii) || is.na(clean_non_ascii)) {
     clean_non_ascii <- FALSE
-  }
-
-  if (!is.logical(atp) || is.na(atp)) {
-    atp <- TRUE
   }
 
   clp <- openxlsx::read.xlsx(
@@ -264,21 +258,6 @@ read_eu_clp <- function(path, clean_non_ascii = FALSE, atp = TRUE) {
       international_chemical_identification =
         .clean_non_ascii(international_chemical_identification)
     )
-  }
-
-  if (atp) {
-
-    file_name <- unlist(strsplit(path, split = "/"))
-    file_name <- file_name[grepl(pattern = ".xlsx", file_name)]
-
-    atp_version <- regmatches(
-      file_name,
-      m = gregexpr(pattern = "[[:digit:]]", text = file_name)
-    )
-    atp_version <- as.integer(paste(unlist(atp_version), collapse = ""))
-
-    clp_res <- transform(clp_res, atp = atp_version)
-
   }
 
   clp_res

@@ -13,30 +13,40 @@
 #' @examples \dontrun{
 #' path <- "Domestic Substances List (DSL).xlsx"
 #'
-#' dsl <- read_dsl(path)
+#' dsl <- read_ca_dsl(path)
 #' }
 #' @importFrom openxlsx read.xlsx
 #' @export
 read_ca_dsl <- function(path, clean_non_ascii = FALSE) {
 
-  pre_dsl <- openxlsx::read.xlsx(path, cols = c(2, 4, 7), detectDates = TRUE)
+  if (!is.logical(clean_non_ascii) || is.na(clean_non_ascii)) {
+    clean_non_ascii <- FALSE
+  }
+
+  pre_dsl <- openxlsx::read.xlsx(path, cols = c(2, 4, 6:7), detectDates = TRUE)
 
   colnames(pre_dsl) <- c(
-    "substance_identifier", "substance_name", "date_published"
+    "substance_identifier", "substance_name", "recent_publications",
+    "date_published"
   )
 
   dsl <- transform(
     pre_dsl,
     substance_identifier = trimws(substance_identifier),
     substance_name = trimws(substance_name),
-    date_published = as.POSIXct(
-      date_published, tz = "Canada/Central", tryFormats = "%Y-%m-%d"
+    recent_publications = trimws(recent_publications),
+    date_published = as.Date(
+      as.POSIXct(
+        date_published, tz = "Canada/Central", tryFormats = "%Y-%m-%d"
+      ),
+      tz = "Canada/Central"
     )
   )
 
   if (clean_non_ascii) {
     dsl <- transform(
-      pre_dsl,
+      dsl,
+      substance_identifier = .clean_non_ascii(substance_identifier),
       substance_name = .clean_non_ascii(substance_name)
     )
   }

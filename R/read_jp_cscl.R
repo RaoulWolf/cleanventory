@@ -14,11 +14,15 @@
 #' @examples \dontrun{
 #' path <- "Japan CSCL_ Existing Chemical Substances.tsv"
 #'
-#' cscl <- read_cscl(path)
+#' cscl <- read_jp_cscl(path)
 #' }
 #' @importFrom utils read.delim
 #' @export
 read_jp_cscl <- function(path, clean_non_ascii = FALSE) {
+
+  if (!is.logical(clean_non_ascii) || is.na(clean_non_ascii)) {
+    clean_non_ascii <- FALSE
+  }
 
   cscl_raw <- utils::read.delim(
     file = path,
@@ -30,26 +34,20 @@ read_jp_cscl <- function(path, clean_non_ascii = FALSE) {
     "no", "chrip_id", "cas_rn", "cas_identity", "chemical_substance_name"
   )
 
-  cscl <- subset(cscl_raw, select = -c(no, cas_identity))
-
   cscl <- transform(
-    cscl,
+    cscl_raw,
     cas_rn = ifelse(
-      test = !is.na(cas_rn) & !.check_cas(cas_rn),
-      yes = NA_character_,
-      no = cas_rn
+      test = .check_cas(cas_rn),
+      yes = cas_rn,
+      no = NA_character_
     )
   )
 
-  cscl <- unique(cscl)
-
   if (clean_non_ascii) {
-
     cscl <- transform(
       cscl,
       chemical_substance_name = .clean_non_ascii(chemical_substance_name)
     )
-
   }
 
   row.names(cscl) <- NULL

@@ -29,7 +29,7 @@ The .xlsx file has to be manually downloaded from the
 \dontrun{
 path <- "Domestic Substances List (DSL).xlsx"
 
-dsl <- read_dsl(path)
+dsl <- read_ca_dsl(path)
 }
 }
 \author{

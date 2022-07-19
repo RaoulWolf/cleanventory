@@ -25,8 +25,7 @@ expect_equal(
 
         path
 
-      },
-      atp = FALSE
+      }
     )
   ),
   c(4702L, 4L)
@@ -36,15 +35,14 @@ expect_equal(
 
 expect_equal(
   dim(
-    read_eu_ec(
+    read_eu_eci(
       path = paste0(
         "https://echa.europa.eu/documents/10162/17222/ec_inventory_en.csv/",
         "326d9adb-27ed-5460-a2da-4f651b81e4b3"
-      ),
-      version = TRUE
+      )
     )
   ),
-  c(106213L, 9L)
+  c(106213L, 8L)
 )
 
 # tsca
@@ -85,8 +83,7 @@ expect_equal(
 
         path
 
-      },
-      last_created = FALSE
+      }
     )
   ),
   c(68576L, 10L)

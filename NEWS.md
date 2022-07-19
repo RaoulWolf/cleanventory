@@ -1,3 +1,10 @@
+# cleanventory 0.3.1 (2022-07-19)
+
+* Fixed function to clean up non-ASCII characters. 
+* Added new function for the Chinese Inventory of Existing Chemical Substances 
+  and Chemicals (`read_cn_iecsc`). 
+* Fixed tests. 
+
 # cleanventory 0.3.0 (2022-07-15)
 
 * Added 2-letter country/sovereign region indication to each function to make it

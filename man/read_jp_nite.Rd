@@ -5,16 +5,13 @@
 \title{Read-In and Clean the Japanese NITE Chemical Management GHS
   Classification Results}
 \usage{
-read_jp_nite(path, clean_non_ascii = FALSE, version = NULL)
+read_jp_nite(path, clean_non_ascii = FALSE)
 }
 \arguments{
 \item{path}{(Character) The path to the XLSX file.}
 
 \item{clean_non_ascii}{(Logical) Should the non-ASCII characters be
 reasonably converted? Defaults to \code{FALSE}.}
-
-\item{version}{(Character) Should the "atp" version information be included?
-Defaults to \code{NULL}.}
 }
 \value{
 Returns a data frame.
@@ -39,7 +36,7 @@ download.file(
 
 path <- "list_all_e"
 
-nite <- read_nite(path)
+nite <- read_jp_nite(path)
 }
 }
 \author{

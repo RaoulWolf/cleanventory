@@ -30,7 +30,7 @@ The three TSV files have to be manually downloaded from the
 \dontrun{
 path <- "Japan CSCL_ Existing Chemical Substances.tsv"
 
-cscl <- read_cscl(path)
+cscl <- read_jp_cscl(path)
 }
 }
 \author{

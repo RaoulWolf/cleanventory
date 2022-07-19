@@ -4,16 +4,13 @@
 \alias{read_eu_clp}
 \title{Read-In and Clean the ECHA CLP Annex VI Data Set}
 \usage{
-read_eu_clp(path, clean_non_ascii = FALSE, atp = TRUE)
+read_eu_clp(path, clean_non_ascii = FALSE)
 }
 \arguments{
 \item{path}{(Character) The path to the XLSX file.}
 
 \item{clean_non_ascii}{(Logical) Should the non-ASCII characters be
 reasonably converted? Defaults to \code{FALSE}.}
-
-\item{atp}{(Logical) Should the "atp" version information be included?
-Defaults to \code{TRUE}.}
 }
 \value{
 Returns a data frame.
@@ -42,7 +39,7 @@ download.file(
 
 path <- "annex_vi_clp_table_atp17_en.xlsx"
 
-clp <- read_clp(path)
+clp <- read_eu_clp(path)
 }
 }
 \author{
