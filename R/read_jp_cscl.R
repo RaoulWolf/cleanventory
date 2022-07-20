@@ -40,6 +40,13 @@ read_jp_cscl <- function(path, clean_non_ascii = FALSE) {
       test = .check_cas(cas_rn),
       yes = cas_rn,
       no = NA_character_
+    ),
+    cas_identity = ifelse(
+      test = grepl(pattern = "[[:digit:]]", cas_identity),
+      yes = as.integer(
+        gsub(pattern = "[^[:digit:]]", replacement = "", cas_identity)
+      ),
+      no = NA_integer_
     )
   )
 
