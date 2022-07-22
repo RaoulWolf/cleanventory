@@ -59,6 +59,15 @@ read_eu_eci <- function(path, clean_non_ascii = FALSE) {
     )
   )
 
+  eci <- transform(
+    eci,
+    cas_no = ifelse(
+      test = .check_cas(cas_no),
+      yes = cas_no,
+      no = NA_character_
+    )
+  )
+
   if (clean_non_ascii) {
     eci <- transform(
       eci,

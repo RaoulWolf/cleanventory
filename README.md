@@ -19,6 +19,10 @@ partially curate data sets of common chemical inventories. The aim is to
 document every step, from the raw (downloaded) files to the final
 tables.
 
+cleanventory aims to correctly identify all missing values in data sets,
+validates CAS Registry Numbers (when present) and additionally offers
+functionality to transform all special characters into ASCII characters.
+
 The dependencies of cleanventory are kept at as minimal as possible:
 [openxlsx](https://cran.r-project.org/web/packages/openxlsx) for
 handling .xlsx files, and the trio of
@@ -32,7 +36,7 @@ We suggest the following packages/functionalities in addition:
 to correctly handle the `us_tsca$cas_reg_no` column (kept as `double`
 for compatibility).
 
-As of 2022-07-19, the following inventories are included:
+As of 2022-07-22, the following inventories are included:
 
 | Chemical Inventory | Function          | Compatible Version(s)                        | URL                                                                                                                                                     |
 |:-------------------|:------------------|:---------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------|

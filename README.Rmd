@@ -29,6 +29,11 @@ The goal of cleanventory is to provide simple functionality to clean and
 partially curate data sets of common chemical inventories. The aim is to 
 document every step, from the raw (downloaded) files to the final tables. 
 
+
+cleanventory aims to correctly identify all missing values in data sets, 
+validates CAS Registry Numbers (when present) and additionally offers 
+functionality to transform all special characters into ASCII characters. 
+
 The dependencies of cleanventory are kept at as minimal as possible: 
 [openxlsx](https://cran.r-project.org/web/packages/openxlsx) for handling 
 .xlsx files, and the trio of [pdftools](https://cran.r-project.org/web/packages/pdftools), [magick](https://cran.r-project.org/web/packages/magick) and [tesseract](https://cran.r-project.org/web/packages/tesseract) to extract
@@ -55,7 +60,7 @@ As of `r Sys.Date()`, the following inventories are included:
 | Philippine ICCS    | `read_ph_iccs()`  | 2017, 2020, 2021      | https://chemical.emb.gov.ph/?page_id=138 |
 | Japan CSCL         | `read_jp_cscl()`  | 31 May 2022</br>31 May 2022</br>1 April 2022 | https://www.nite.go.jp/en/chem/chrip/chrip_search/sltLst|
 | Canada DSL         | `read_ca_dsl()`   | 14 June 2022          | https://pollution-waste.canada.ca/substances-search/Substance?lang=en |
-| China IECSC        | `read_cn_iecsc()` | 2013                  | https://www.mee.gov.cn/gkml/hbb/bgg/201301/t20130131_245810.htm
+| China IECSC        | `read_cn_iecsc()` | 2013                  | https://www.mee.gov.cn/gkml/hbb/bgg/201301/t20130131_245810.htm |
 
 ## Installation
 

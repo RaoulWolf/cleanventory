@@ -252,6 +252,15 @@ read_eu_clp <- function(path, clean_non_ascii = FALSE) {
 
   clp_res <- do.call(what = "rbind", args = c(clp_res, make.row.names = FALSE))
 
+  clp_res <- transform(
+    clp_res,
+    cas_no = ifelse(
+      test = .check_cas(cas_no),
+      yes = cas_no,
+      no = NA_character_
+    )
+  )
+
   if (clean_non_ascii) {
     clp_res <- transform(
       clp_res,

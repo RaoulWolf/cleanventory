@@ -14,30 +14,44 @@
         return(FALSE)
       }
 
+      if (grepl(pattern = "[^[:digit:]|-]", x)) {
+        return(FALSE)
+      }
+
       if (nchar(gsub(pattern = "[^-]", replacement = "", x)) != 2) {
         return(FALSE)
       }
 
-      if (
-        any(
-          sapply(
-            unlist(strsplit(x, split = "-")),
-            FUN = function(x) { nchar(x) }
-          ) == 0L
-        )
-      ) {
+      cas_split <- unlist(strsplit(x, split = "-"))
+
+      if (length(cas_split) != 3) {
         return(FALSE)
       }
 
-      cas <- gsub(pattern = "-", replacement = "", x)
-
-      if (grepl(pattern = "[^[:digit:]]", cas)) {
+      if (nchar(cas_split[1]) < 2 || nchar(cas_split[1]) > 7) {
         return(FALSE)
       }
 
-      if (nchar(cas) < 5 || nchar(cas) > 10) {
+      if (nchar(cas_split[2]) != 2) {
         return(FALSE)
       }
+
+      if (nchar(cas_split[3]) != 1) {
+        return(FALSE)
+      }
+
+      if (as.integer(cas_split[1]) < 50 &&
+          !(
+            x %in% c(
+              "35-66-5", "35-67-6", "36-51-1", "36-88-4", "37-71-8", "37-82-1",
+              "37-87-6", "38-26-6"
+            )
+          )
+        ) {
+        return(FALSE)
+      }
+
+      cas <- paste(cas_split, collapse = "")
 
       check_dig <- as.integer(substring(cas, first = nchar(cas)))
 

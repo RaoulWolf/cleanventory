@@ -38,7 +38,15 @@ read_jp_nite <- function(path, clean_non_ascii = FALSE) {
     "cas", "cas_without_hyphen", "substance_name", "id", "fy", "new_revise"
   )
 
-  nite <- transform(nite, cas_without_hyphen = as.integer(cas_without_hyphen))
+  nite <- transform(
+    nite,
+    cas = ifelse(
+      test = .check_cas(cas),
+      yes = cas,
+      no = NA_character_
+    ),
+    cas_without_hyphen = as.integer(cas_without_hyphen)
+  )
 
   if (clean_non_ascii) {
     nite <- transform(

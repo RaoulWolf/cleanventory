@@ -39,6 +39,15 @@ read_us_tsca <- function(path) {
     "flag", "activity"
   )
 
+  tsca <- transform(
+    tsca,
+    cas_rn = ifelse(
+      test = .check_cas(cas_rn),
+      yes = cas_rn,
+      no = NA_character_
+    )
+  )
+
   tsca
 
 }

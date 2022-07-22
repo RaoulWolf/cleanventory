@@ -50,9 +50,9 @@ read_au_ici <- function(path, clean_non_ascii = FALSE) {
     ici,
     cr_no = as.integer(cr_no),
     cas_no = ifelse(
-      test = cas_no == "Confidential" | !.check_cas(cas_no),
-      yes = NA_character_,
-      no = cas_no
+      test = .check_cas(cas_no),
+      yes = cas_no,
+      no = NA_character_
     )
   )
 

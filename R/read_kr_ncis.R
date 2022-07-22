@@ -106,6 +106,15 @@ read_kr_ncis <- function(path, clean_non_ascii = FALSE) {
     )
   )
 
+  ncis_agg <- transform(
+    ncis_agg,
+    cas_no = ifelse(
+      test = .check_cas(cas_no),
+      yes = cas_no,
+      no = NA_character_
+    )
+  )
+
   ncis_agg
 
 }

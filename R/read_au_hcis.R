@@ -33,7 +33,11 @@ read_au_hcis <- function(path, clean_non_ascii = FALSE) {
 
   hcis <- transform(
     hcis,
-    cas_no = trimws(cas_no),
+    cas_no = ifelse(
+      test = .check_cas(trimws(cas_no)),
+      yes = trimws(cas_no),
+      no = NA_character_
+    ),
     chemical_name = trimws(chemical_name)
   )
 
