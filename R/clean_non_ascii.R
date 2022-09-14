@@ -18,6 +18,13 @@
         return(x)
       } else {
         x <- iconv(x, to = "ASCII", sub = "byte")
+
+        x <- gsub(pattern = "<85>", replacement = "...", x)
+        x <- gsub(pattern = "<92>", replacement = "'", x)
+        x <- gsub(pattern = "<96>", replacement = "-", x)
+
+        x <- gsub(pattern = "<b1>", replacement = "+-", x)
+
         x <- gsub(pattern = "<c2><ab>", replacement = "", x) # careful
         x <- gsub(pattern = "<c2><b0>", replacement = "degree", x)
         x <- gsub(pattern = "<c2><b1>", replacement = "plus-minus", x)
@@ -32,18 +39,26 @@
         x <- gsub(pattern = "<c2><b3>", replacement = "3", x)
         x <- gsub(pattern = "<c2><b7>", replacement = ".", x)
         x <- gsub(pattern = "<c2><b9>", replacement = "1", x)
+        x <- gsub(pattern = "<c2><bd>", replacement = "1/2", x)
         x <- gsub(pattern = "<c2><be>", replacement = "3/4", x)
 
         x <- gsub(pattern = "<c3><84>", replacement = "AE", x)
+        x <- gsub(pattern = "<c3><85>", replacement = "AA", x)
+        x <- gsub(pattern = "<c3><86>", replacement = "AE", x)
         x <- gsub(pattern = "<c3><91>", replacement = "N", x)
+        x <- gsub(pattern = "<c3><93>", replacement = "O", x)
         x <- gsub(pattern = "<c3><96>", replacement = "OE", x)
         x <- gsub(pattern = "<c3><97>", replacement = ".x", x) # careful
+        x <- gsub(pattern = "<c3><98>", replacement = "O", x)
         x <- gsub(pattern = "<c3><9c>", replacement = "UE", x)
 
         x <- gsub(pattern = "<c3><a4>", replacement = "ae", x)
+        x <- gsub(pattern = "<c3><a5>", replacement = "aa", x)
+        x <- gsub(pattern = "<c3><a6>", replacement = "ae", x)
         x <- gsub(pattern = "<c3><a8>", replacement = "e", x)
         x <- gsub(pattern = "<c3><a9>", replacement = "e", x)
         x <- gsub(pattern = "<c3><b6>", replacement = "oe", x)
+        x <- gsub(pattern = "<c3><b8>", replacement = "o", x)
         x <- gsub(pattern = "<c3><bc>", replacement = "ue", x)
 
         x <- gsub(pattern = "<c3><9f>", replacement = "beta", x) # careful

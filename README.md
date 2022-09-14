@@ -33,10 +33,11 @@ extract data from (image) .pdf files.
 
 We suggest the following packages/functionalities in addition:
 [`bit64::as.integer64()`](https://cran.r-project.org/web/packages/bit64)
-to correctly handle the `us_tsca$cas_reg_no` column (kept as `double`
-for compatibility).
+to correctly handle the `us_tsca$cas_reg_no` and
+`us_cdr$chemical_id_wo_dashes` columns (kept as `double` for
+compatibility).
 
-As of 2022-07-22, the following inventories are included:
+As of 2022-08-02, the following inventories are included:
 
 | Chemical Inventory | Function          | Compatible Version(s)                        | URL                                                                                                                                                     |
 |:-------------------|:------------------|:---------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -53,6 +54,9 @@ As of 2022-07-22, the following inventories are included:
 | Japan CSCL         | `read_jp_cscl()`  | 31 May 2022</br>31 May 2022</br>1 April 2022 | <https://www.nite.go.jp/en/chem/chrip/chrip_search/sltLst>                                                                                              |
 | Canada DSL         | `read_ca_dsl()`   | 14 June 2022                                 | <https://pollution-waste.canada.ca/substances-search/Substance?lang=en>                                                                                 |
 | China IECSC        | `read_cn_iecsc()` | 2013                                         | <https://www.mee.gov.cn/gkml/hbb/bgg/201301/t20130131_245810.htm>                                                                                       |
+| Nordics SPIN       | `read_xn_spin()`  | 2000                                         | <http://www.spin2000.net/spinmyphp/>                                                                                                                    |
+| US CDR             | `read_us_cdr()`   | 2016</br>2020                                | <https://www.epa.gov/chemical-data-reporting>                                                                                                           |
+| Malaysia CIMS      | `read_my_cims()`  | 2017                                         | <https://cims.dosh.gov.my/>                                                                                                                             |
 
 ## Installation
 
