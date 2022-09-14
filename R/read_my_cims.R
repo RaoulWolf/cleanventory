@@ -3,6 +3,8 @@
 #' @description This function reads-in and automatically cleans the Malaysia
 #'   Chemical Information Management System (CIMS) inventory.
 #' @param path (Character) The path to the CSV file.
+#' @param clean_non_ascii (Logical) Should the non-ASCII characters be
+#'   reasonably converted? Defaults to \code{FALSE}.
 #' @details The function reads-in and cleans the United States Chemical Data
 #'   Reporting inventory.
 #' @return Returns a data frame.

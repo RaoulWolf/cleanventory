@@ -9,6 +9,9 @@ read_my_cims(path, clean_non_ascii = FALSE)
 }
 \arguments{
 \item{path}{(Character) The path to the CSV file.}
+
+\item{clean_non_ascii}{(Logical) Should the non-ASCII characters be
+reasonably converted? Defaults to \code{FALSE}.}
 }
 \value{
 Returns a data frame.

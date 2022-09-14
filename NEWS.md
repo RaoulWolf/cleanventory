@@ -1,8 +1,15 @@
+# cleanventory 0.3.2 (2022-09-14) 
+
+* Added new functions for the Malaysia Chemical Information Management System 
+  (`read_my_cims()`), the United States Chemical Data Reporting Inventory 
+  (`read_us_cdr()`), and the Substances in Preparations in Nordic Countries 
+  inventory (`read_xn_spin()`). 
+
 # cleanventory 0.3.1 (2022-07-19)
 
 * Fixed function to clean up non-ASCII characters. 
 * Added new function for the Chinese Inventory of Existing Chemical Substances 
-  and Chemicals (`read_cn_iecsc`). 
+  and Chemicals (`read_cn_iecsc()`). 
 * Fixed tests. 
 
 # cleanventory 0.3.0 (2022-07-15)

@@ -47,44 +47,44 @@ expect_equal(
 
 # tsca
 
-expect_equal(
-  dim(
-    read_us_tsca(
-      path = {
-
-        tmp <- tempdir()
-
-        download.file(
-          url = paste0(
-            "https://www.epa.gov/system/files/other-files/2022-03/",
-            "csv-non-cbi-tsca-inventory-022022.zip"
-          ),
-          destfile = paste(
-            tmp,
-            "csv-non-cbi-tsca-inventory-022022.zip",
-            sep = "/"
-          ),
-          quiet = TRUE,
-          mode = ifelse(.Platform$OS.type == "windows", "wb", "w")
-        )
-        unzip(zipfile = paste(
-          tmp,
-          "csv-non-cbi-tsca-inventory-022022.zip",
-          sep = "/"
-        ),
-        exdir = tmp
-        )
-
-        file_names <- list.files(tmp)
-
-        file_path <- file_names[grepl(pattern = "TSCA", file_names)]
-
-        path <- paste(tmp, file_path, sep = "/")
-
-        path
-
-      }
-    )
-  ),
-  c(68576L, 10L)
-)
+# expect_equal(
+#   dim(
+#     read_us_tsca(
+#       path = {
+#
+#         tmp <- tempdir()
+#
+#         download.file(
+#           url = paste0(
+#             "https://www.epa.gov/system/files/other-files/2022-03/",
+#             "csv-non-cbi-tsca-inventory-022022.zip"
+#           ),
+#           destfile = paste(
+#             tmp,
+#             "csv-non-cbi-tsca-inventory-022022.zip",
+#             sep = "/"
+#           ),
+#           quiet = TRUE,
+#           mode = ifelse(.Platform$OS.type == "windows", "wb", "w")
+#         )
+#         unzip(zipfile = paste(
+#           tmp,
+#           "csv-non-cbi-tsca-inventory-022022.zip",
+#           sep = "/"
+#         ),
+#         exdir = tmp
+#         )
+#
+#         file_names <- list.files(tmp)
+#
+#         file_path <- file_names[grepl(pattern = "TSCA", file_names)]
+#
+#         path <- paste(tmp, file_path, sep = "/")
+#
+#         path
+#
+#       }
+#     )
+#   ),
+#   c(68576L, 10L)
+# )
